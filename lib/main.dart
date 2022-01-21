@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -37,19 +36,32 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   //TEXT FIELD CONTROLLERS
-  final emriController = TextEditingController();
-  final mbiemriController = TextEditingController();
-  final atesiaController = TextEditingController();
-  final amesiaController = TextEditingController();
-  final datelindjaController = TextEditingController();
-  final idKryefamiljariController = TextEditingController();
+  final emriController = TextEditingController(text: "");
+  final mbiemriController = TextEditingController(text: "");
+  final atesiaController = TextEditingController(text: "");
+  final amesiaController = TextEditingController(text: "");
+  final datelindjaController = TextEditingController(text: "");
+  final idKryefamiljariController = TextEditingController(text: "");
+
+  Map generateJson() {
+    final Map<String, Object> jsonData;
+    jsonData = {
+      "db": 1,
+      "Emri": [0, emriController.text],
+      "Mbiemri": [0, mbiemriController.text],
+      "Atesia": [0, atesiaController.text],
+      "Amesia": [0, amesiaController.text],
+      "Datelindja": [0, datelindjaController.text],
+      "Id_Kryefamiliari": [0, idKryefamiljariController.text]
+    };
+
+    return jsonData;
+  }
+
   //REQUEST DATA FROM SERVER
   void data() async {
     var url = Uri.parse('https://blade.ninja/update');
-    var body = jsonEncode({
-      "db": 1,
-      "Emri": [0, "${emriController.text}"]
-    });
+    var body = jsonEncode(generateJson());
     post(url,
 //    headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"},
             body: jsonEncode(body))
