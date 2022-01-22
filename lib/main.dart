@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'CustomDrawer.dart';
-import 'UIMain.dart';
 
+// [0] name as it should be shown in the text input
+// [1] default LIKE search boolean
+// [2] column name on database
 
-const databazat=[["Gjendja Civile 2008", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Amesia', 0, 'Amesia'], ['Datelindja', 0, 'Datelindja'], ['Id Kryefamiljari', 0, 'Id Kryefamiljari']]],
-  ["Patronazhisti 2021", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Amesia', 0, 'Amesia'], ['Datelindja', 0, 'Datelindja'], ['Id Kryefamiljari', 0, 'Id Kryefamiljari']]],
-  ["Targat 2021", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Amesia', 0, 'Amesia'], ['Datelindja', 0, 'Datelindja'], ['Id Kryefamiljari', 0, 'Id Kryefamiljari']]],
-  ["Targat + Patronazhisti 2021", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Amesia', 0, 'Amesia'], ['Datelindja', 0, 'Datelindja'], ['Id Kryefamiljari', 0, 'Id Kryefamiljari']]],
-  ["Rrogat Prill", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Amesia', 0, 'Amesia'], ['Datelindja', 0, 'Datelindja'], ['Id Kryefamiljari', 0, 'Id Kryefamiljari']]],
+const databazat=[["Gjendja Civile 2008", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Amesia', 0, 'Amesia'], ['Datelindja', 1, 'Datelindja'], ['Id Kryefamiljari', 0, 'Id Kryefamiljari']]],
+  ["Patronazhisti 2021", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Datelindja', 1, 'Datelindja'], ['Telefoni', 1, 'Tel'], ['Numri Personal', 0, 'NID']]],
+  ["Targat 2021", [['Targa', 1, 'Targa'], ['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['ID Pronari', 0, 'ID Pronari']]],
+  ["Targat + Patronazhisti 2021", [['Targa', 1, 'Targa'], ['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Telefoni', 1, "Tel"], ['ID Pronari', 0, 'ID Pronari']]],
+  ["Rrogat Prill", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Numri Personal', 0, 'NID'], ['NIPT', 0, 'NIPT'], ['Subjekti', 1, 'Subjekti']]],
   ];
 
 
@@ -18,12 +20,6 @@ void main() {
       initialRoute: '/login',
       routes: {
         '/login': (context) => const HomeScreen(),
-        '/0': (context) => UIMain(0),
-        '/1': (context) => UIMain(1),
-        '/2': (context) => UIMain(1),
-        '/3': (context) => UIMain(1),
-        '/4': (context) => UIMain(1),
-        '/5': (context) => UIMain(1),
       },
     ),
   );
@@ -38,6 +34,7 @@ class HomeScreen extends StatelessWidget {
       drawer: CustomDrawer(),
       appBar: AppBar(
         title: const Text('DataBaza'),
+
       ),
     );
   }

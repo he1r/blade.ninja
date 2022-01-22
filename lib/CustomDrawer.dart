@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'UIMain.dart';
+
 class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,27 +19,46 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.person),
             title: const Text("Gjendja Civile 2008"),
             onTap: () {
-              Navigator.pushNamed(context, '/0');
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => UIMain(0),),
+              );
             },
           ),
           ListTile(
             leading: const Icon(Icons.person_add_alt),
             title: const Text("Patronazhisti 2021"),
             onTap: () {
-              Navigator.pushNamed(context, '/1');
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => UIMain(1),),
+              );
             },
           ),
-          const ListTile(
-            leading: Icon(Icons.car_repair_rounded),
-            title: Text("Targat 2021"),
+          ListTile(
+            leading: const Icon(Icons.car_repair_rounded),
+            title: const Text("Targat 2021"),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => UIMain(2),),
+              );
+            },
           ),
-          const ListTile(
-            leading: Icon(Icons.person_search_sharp),
-            title: Text("Targat + Patronazhisti 2021"),
+          ListTile(
+            leading: const Icon(Icons.person_search_sharp),
+            title: const Text("Targat + Patronazhisti 2021"),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => UIMain(3),),
+              );
+            },
           ),
-          const ListTile(
-            leading: Icon(Icons.money),
-            title: Text("Rrogat Prill"),
+          ListTile(
+            leading: const Icon(Icons.money),
+            title: const Text("Rrogat Prill"),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => UIMain(4),),
+              );
+            },
           ),
         ],
       ),
