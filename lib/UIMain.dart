@@ -23,7 +23,7 @@ class UIMain extends StatelessWidget {
       "db": dbIndex,
     };
     for (int i = 0; i < fields.length; i++) {
-      jsonData[fields[i][0].toString()]=[0, controllers[i].text];
+      jsonData[fields[i][2].toString()]=[0, controllers[i].text];
     }
     print(jsonData);
     return jsonData;
@@ -57,7 +57,7 @@ class UIMain extends StatelessWidget {
           enabledBorder:
               UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           focusedBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.cyan)),
 //          focusedBorder: OutlineInputBorder(
 //                              borderSide: BorderSide(color: Colors.teal)
 //          ),
@@ -76,17 +76,17 @@ class UIMain extends StatelessWidget {
             selectionHandleColor: Colors.white,
         ),
         textTheme: const TextTheme(
-          bodyText1: TextStyle(color: Colors.white),
-          bodyText2: TextStyle(color: Colors.white),
-          button: TextStyle(color: Colors.white),
-          caption: TextStyle(color: Colors.white),
+//          bodyText1: TextStyle(color: Colors.white),
+//          bodyText2: TextStyle(color: Colors.white),
+//          button: TextStyle(color: Colors.white),
+//          caption: TextStyle(color: Colors.white),
           subtitle1: TextStyle(color: Colors.white), // <-- input text color
-          headline1: TextStyle(color: Colors.white),
-          headline2: TextStyle(color: Colors.white),
-          headline3: TextStyle(color: Colors.white),
-          headline4: TextStyle(color: Colors.white),
-          headline5: TextStyle(color: Colors.white),
-          headline6: TextStyle(color: Colors.white),
+//          headline1: TextStyle(color: Colors.white),
+//          headline2: TextStyle(color: Colors.white),
+//          headline3: TextStyle(color: Colors.white),
+//          headline4: TextStyle(color: Colors.white),
+//          headline5: TextStyle(color: Colors.white),
+//          headline6: TextStyle(color: Colors.white),
         ),
       ),
 
