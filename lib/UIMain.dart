@@ -61,7 +61,8 @@ class UIMain extends StatelessWidget {
 //          focusedBorder: OutlineInputBorder(
 //                              borderSide: BorderSide(color: Colors.teal)
 //          ),
-          border: OutlineInputBorder(),
+
+//          border: InputBorder(borderSide: BorderSide(color: Colors.red)),
           labelStyle: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -70,22 +71,22 @@ class UIMain extends StatelessWidget {
 
         ),
         textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Colors.red,
+          cursorColor: Colors.white,
             selectionColor: Colors.white,
             selectionHandleColor: Colors.white,
         ),
         textTheme: const TextTheme(
-          bodyText1: TextStyle(color: Colors.blue),
-          bodyText2: TextStyle(color: Colors.blue),
-          button: TextStyle(color: Colors.blue),
-          caption: TextStyle(color: Colors.blue),
-          subtitle1: TextStyle(color: Colors.blue), // <-- input text color
-          headline1: TextStyle(color: Colors.blue),
-          headline2: TextStyle(color: Colors.blue),
-          headline3: TextStyle(color: Colors.blue),
-          headline4: TextStyle(color: Colors.blue),
-          headline5: TextStyle(color: Colors.blue),
-          headline6: TextStyle(color: Colors.blue),
+          bodyText1: TextStyle(color: Colors.white),
+          bodyText2: TextStyle(color: Colors.white),
+          button: TextStyle(color: Colors.white),
+          caption: TextStyle(color: Colors.white),
+          subtitle1: TextStyle(color: Colors.white), // <-- input text color
+          headline1: TextStyle(color: Colors.white),
+          headline2: TextStyle(color: Colors.white),
+          headline3: TextStyle(color: Colors.white),
+          headline4: TextStyle(color: Colors.white),
+          headline5: TextStyle(color: Colors.white),
+          headline6: TextStyle(color: Colors.white),
         ),
       ),
 
@@ -102,14 +103,20 @@ class UIMain extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   for( int i = 0 ; i < fields.length ; i++)
-                    Padding(
-                      padding: const EdgeInsets.all(1),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: fields[i][0].toString(),
+                    Row(
+                      children: [
+                      const SizedBox(width: 4, height: 1,), // simple space
+                      Expanded(
+//                        padding: const EdgeInsets.all(1),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            labelText: fields[i][0].toString(),
+                          ),
+                          controller: controllers[i],
                         ),
-                        controller: controllers[i],
                       ),
+                      const SizedBox(width: 60, height: 2,), // space where the button is meant to go
+                      ],
                     ),
 
                   const SizedBox(height: 20), // space for buttons
