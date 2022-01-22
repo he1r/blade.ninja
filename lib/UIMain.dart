@@ -1,16 +1,18 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import './patronazhisti.dart';
 import 'CustomDrawer.dart';
+import 'main.dart';
 
-class GjendjaCivile extends StatelessWidget {
-  // define the columns an the default LIKE search boolean
-  var fields = [['Emri', 0], ['Mbiemri', 0], ['Atesia', 0], ['Amesia', 0], ['Datelindja', 0], ['Id Kryefamiljari', 0]];
+class UIMain extends StatelessWidget {
 
+  var fields;
   var controllers=[];
-  GjendjaCivile() {
-    for (int i = 0; i < fields.length; i++){
+  var dbIndex=0;
+
+  UIMain(this.dbIndex, {Key? key}) : super(key: key) {
+      fields = databazat[dbIndex][1];
+    for (int i = 0; i < fields.length; i++) {
       controllers.add(TextEditingController(text: ""));
     }
   }
@@ -18,7 +20,7 @@ class GjendjaCivile extends StatelessWidget {
   Map generateJson() {
     final Map<String, Object> jsonData;
     jsonData = {
-      "db": 1,
+      "db": dbIndex,
     };
     for (int i = 0; i < fields.length; i++) {
       jsonData[fields[i][0].toString()]=[0, controllers[i].text];
@@ -92,7 +94,7 @@ class GjendjaCivile extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             centerTitle: true,
-            title: const Text("Gjendja Civile 2008"),
+            title: Text(databazat[dbIndex][0].toString()),
           ),
           drawer: CustomDrawer(),
           body: Padding(
@@ -113,7 +115,6 @@ class GjendjaCivile extends StatelessWidget {
                   const SizedBox(height: 20), // space for buttons
 
                   Row(
-
                     children: [
                       Container(
                         margin: EdgeInsets.all(10),

@@ -16,14 +16,14 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.person),
             title: const Text("Gjendja Civile 2008"),
             onTap: () {
-              Navigator.pushNamed(context, '/second');
+              Navigator.pushNamed(context, '/0');
             },
           ),
           ListTile(
             leading: const Icon(Icons.person_add_alt),
             title: const Text("Patronazhisti 2021"),
             onTap: () {
-              Navigator.pushNamed(context, '/third');
+              Navigator.pushNamed(context, '/1');
             },
           ),
           const ListTile(
