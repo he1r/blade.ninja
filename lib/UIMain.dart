@@ -9,6 +9,7 @@ class UIMain extends StatelessWidget {
   var fields;
   var controllers=[];
   var dbIndex=0;
+  var checkboxVal=0; // temporary
 
   UIMain(this.dbIndex, {Key? key}) : super(key: key) {
       fields = databazat[dbIndex][1];
@@ -23,7 +24,7 @@ class UIMain extends StatelessWidget {
       "db": dbIndex,
     };
     for (int i = 0; i < fields.length; i++) {
-      jsonData[fields[i][2].toString()]=[0, controllers[i].text];
+      jsonData[fields[i][2].toString()]=[fields[i][1]+checkboxVal, controllers[i].text];
     }
     print(jsonData);
     return jsonData;
