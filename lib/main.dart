@@ -1,18 +1,29 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
-import './patronazhisti.dart';
-import './gjendjaCivile.dart';
+import 'CustomDrawer.dart';
+import 'UIMain.dart';
+
+
+const databazat=[["Gjendja Civile 2008", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Amesia', 0, 'Amesia'], ['Datelindja', 0, 'Datelindja'], ['Id Kryefamiljari', 0, 'Id Kryefamiljari']]],
+  ["Patronazhisti 2021", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Amesia', 0, 'Amesia'], ['Datelindja', 0, 'Datelindja'], ['Id Kryefamiljari', 0, 'Id Kryefamiljari']]],
+  ["Targat 2021", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Amesia', 0, 'Amesia'], ['Datelindja', 0, 'Datelindja'], ['Id Kryefamiljari', 0, 'Id Kryefamiljari']]],
+  ["Targat + Patronazhisti 2021", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Amesia', 0, 'Amesia'], ['Datelindja', 0, 'Datelindja'], ['Id Kryefamiljari', 0, 'Id Kryefamiljari']]],
+  ["Rrogat Prill", [['Emri', 0, 'Emri'], ['Mbiemri', 0, 'Mbiemri'], ['Atesia', 0, 'Atesia'], ['Amesia', 0, 'Amesia'], ['Datelindja', 0, 'Datelindja'], ['Id Kryefamiljari', 0, 'Id Kryefamiljari']]],
+  ];
+
 
 void main() {
   runApp(
     MaterialApp(
       title: 'DataBaza',
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
-        '/': (context) => const HomeScreen(),
-        '/second': (context) => GjendjaCivile(),
-        '/third': (context) => Patronazhisti(),
+        '/login': (context) => const HomeScreen(),
+        '/0': (context) => UIMain(0),
+        '/1': (context) => UIMain(1),
+        '/2': (context) => UIMain(1),
+        '/3': (context) => UIMain(1),
+        '/4': (context) => UIMain(1),
+        '/5': (context) => UIMain(1),
       },
     ),
   );
@@ -24,43 +35,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20),
-              color: Theme.of(context).primaryColor,
-            ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text("Gjendja Civile 2008"),
-              onTap: () {
-                Navigator.pushNamed(context, '/second');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.person_add_alt),
-              title: const Text("Patronazhisti 2021"),
-              onTap: () {
-                Navigator.pushNamed(context, '/third');
-              },
-            ),
-            const ListTile(
-              leading: Icon(Icons.car_repair_rounded),
-              title: Text("Targat 2021"),
-            ),
-            const ListTile(
-              leading: Icon(Icons.person_search_sharp),
-              title: Text("Targat + Patronazhisti 2021"),
-            ),
-            const ListTile(
-              leading: Icon(Icons.money),
-              title: Text("Rrogat Prill"),
-            ),
-          ],
-        ),
-      ),
+      drawer: CustomDrawer(),
       appBar: AppBar(
         title: const Text('DataBaza'),
       ),
