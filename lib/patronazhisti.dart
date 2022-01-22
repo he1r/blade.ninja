@@ -11,7 +11,7 @@ class Patronazhisti extends StatelessWidget {
   final datelindjaController = TextEditingController(text: "");
   final idKryefamiljariController = TextEditingController(text: "");
 
-  const Patronazhisti({Key? key}) : super(key: key);
+//  const Patronazhisti({Key? key}) : super(key: key);
 
   Map generateJson() {
     final Map<String, Object> jsonData;
