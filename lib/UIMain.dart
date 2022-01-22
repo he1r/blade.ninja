@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'CustomDrawer.dart';
@@ -42,6 +43,107 @@ class UIMain extends StatelessWidget {
     });
   }
 
+  void setDateText(var controller, var date){
+    controller.text=date;
+  }
+
+  Future<void> _selectDate(BuildContext context, var controller) async {
+    var selectedDate=DateTime.now().toString();
+    if (controller.text.isNotEmpty) {
+      selectedDate = controller.text;
+      print("----->>>>>"+selectedDate);
+    }
+    var startDate = DateTime.now();
+    try {
+      startDate = DateTime.parse(controller.text);
+    }
+    // ignore: empty_catches
+    on Exception{
+
+    }
+
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: startDate,
+      firstDate: DateTime.parse("1800-01-01"),
+      lastDate: DateTime.now(),
+    );
+
+    if (picked != null){
+      setDateText(controller, picked.toString().split(" ")[0]);
+      print("---->>"+picked.toString());
+      selectedDate = picked.toString();
+    }
+  }
+
+  List<Widget> generateInputFields(BuildContext context){
+    List<Widget> data = [];
+    for( int i = 0 ; i < fields.length ; i++) {
+      if (fields[i][2] == 'Datelindja') {
+        data.add(
+            Stack(
+                children: [
+                  Row(
+                    children: [
+                      const SizedBox(width: 4, height: 1,),
+                      // simple space
+                      Expanded(
+                        //                        padding: const EdgeInsets.all(1),
+                        child: TextField(
+//                          enabled: false,
+                          decoration: InputDecoration(
+//                            floatingLabelBehavior: FloatingLabelBehavior.always,
+//                            hintText: "dd/mm/yyyy",
+                            labelText: fields[i][0].toString(),
+                          ),
+                          controller: controllers[i],
+                        ),
+                      ),
+                      const SizedBox(width: 60, height: 2,),
+
+                      // space where the button is meant to go
+                    ],
+                  ),
+                  Row(
+                  children: [
+                    Expanded(
+                      // ignore: deprecated_member_use
+                      child: FlatButton(
+                        onPressed: () => _selectDate(context, controllers[i]),
+                        child: Text(""),
+
+                      ),
+                      ),
+                    const SizedBox(width: 60, height: 2,),
+                    ],
+                ),
+              ],
+            ),
+        );
+      }
+      else {
+        data.add(Row(
+          children: [
+            const SizedBox(width: 4, height: 1,),
+            // simple space
+            Expanded(
+              //                        padding: const EdgeInsets.all(1),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: fields[i][0].toString(),
+                ),
+                controller: controllers[i],
+              ),
+            ),
+            const SizedBox(width: 60, height: 2,),
+            // space where the button is meant to go
+          ],
+        )
+        );
+      };
+    }
+    return data;
+  }
 //DATABASES LIST
 
   @override
@@ -54,7 +156,10 @@ class UIMain extends StatelessWidget {
         scaffoldBackgroundColor: Color(0xff1f2836),
         inputDecorationTheme: const InputDecorationTheme(
           contentPadding: EdgeInsets.all(10),
-          isDense: true,
+          border:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+          disabledBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           enabledBorder:
               UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           focusedBorder:
@@ -103,22 +208,7 @@ class UIMain extends StatelessWidget {
               padding: const EdgeInsets.all(2),
               child: Column(
                 children: <Widget>[
-                  for( int i = 0 ; i < fields.length ; i++)
-                    Row(
-                      children: [
-                      const SizedBox(width: 4, height: 1,), // simple space
-                      Expanded(
-//                        padding: const EdgeInsets.all(1),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            labelText: fields[i][0].toString(),
-                          ),
-                          controller: controllers[i],
-                        ),
-                      ),
-                      const SizedBox(width: 60, height: 2,), // space where the button is meant to go
-                      ],
-                    ),
+                  ...generateInputFields(context), // INPUT FIELDS
 
                   const SizedBox(height: 20), // space for buttons
 
