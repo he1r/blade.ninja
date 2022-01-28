@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
         ),
         body: Column(children: <Widget>[
           Container(
-            margin: const EdgeInsets.only(left: 750),
+            margin: const EdgeInsets.only(left: 25),
             alignment: Alignment.center,
             width: 400,
             padding: const EdgeInsets.only(top: 200),
@@ -113,7 +113,7 @@ class HomeScreen extends StatelessWidget {
             width: 400,
             height: 100,
             alignment: Alignment.center,
-            margin: const EdgeInsets.only(left: 750),
+            margin: const EdgeInsets.only(left: 25),
             padding: const EdgeInsets.only(top: 20),
             child: const TextField(
               obscureText: true,
@@ -133,7 +133,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 30, left: 750),
+            margin: const EdgeInsets.only(top: 30, left: 25),
             width: 120,
             height: 40,
             child: ElevatedButton(
@@ -146,6 +146,35 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
             ),
+          ),
+          Row(
+            children: [
+              const SizedBox(
+                width: 10,
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 800, top: 50),
+                child: const Text(
+                  "Don't have an account?",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+              Container(
+                width: 120,
+                height: 40,
+                margin: const EdgeInsets.only(top: 50),
+                child: ElevatedButton(
+                  onPressed: null,
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.transparent)),
+                  child: const Text(
+                    "Sign Up",
+                    style: TextStyle(color: Colors.green, fontSize: 20),
+                  ),
+                ),
+              ),
+            ],
           )
         ]));
   }
