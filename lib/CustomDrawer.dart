@@ -9,7 +9,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.indigo[900],
+      backgroundColor: Colors.black,
       child: Column(
         children: <Widget>[
           const SizedBox(
@@ -17,7 +17,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           Container(
               width: double.infinity,
-              color: Colors.indigo[900],
+              color: Colors.black,
               padding: const EdgeInsets.all(20),
               child: Text(
                 "DataBaza",
