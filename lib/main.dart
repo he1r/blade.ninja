@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'CustomDrawer.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'UIMain.dart';
 
 // [0] name as it should be shown in the text input
 // [1] default LIKE search boolean
@@ -81,7 +81,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.indigo[900],
-        drawer: CustomDrawer(),
         appBar: AppBar(
           toolbarHeight: 80,
           centerTitle: true,
@@ -142,13 +141,20 @@ class HomeScreen extends StatelessWidget {
             width: 120,
             height: 40,
             child: ElevatedButton(
-              onPressed: null,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UIMain(0),
+                  ),
+                );
+              },
               style: ButtonStyle(
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.lightBlue)),
               child: const Text(
                 "Sign In",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
           ),
@@ -174,8 +180,8 @@ class HomeScreen extends StatelessWidget {
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.transparent)),
                   child: const Text(
-                    "Sign Up",
-                    style: TextStyle(color: Colors.green, fontSize: 20),
+                    "Sign Up !",
+                    style: TextStyle(color: Colors.lime, fontSize: 20),
                   ),
                 ),
               ),
@@ -188,8 +194,12 @@ class HomeScreen extends StatelessWidget {
                 child: GFButton(
                   onPressed: () {},
                   text: "he1r",
-                  icon: const Icon(FontAwesomeIcons.github),
-                  type: GFButtonType.outline2x,
+                  textStyle: const TextStyle(color: Colors.white),
+                  icon: const Icon(
+                    FontAwesomeIcons.github,
+                    color: Colors.white,
+                  ),
+                  type: GFButtonType.transparent,
                 ),
               ),
               Container(
@@ -197,8 +207,12 @@ class HomeScreen extends StatelessWidget {
                 child: GFButton(
                   onPressed: () {},
                   text: "omega0verride",
-                  icon: const Icon(FontAwesomeIcons.github),
-                  type: GFButtonType.outline2x,
+                  textStyle: const TextStyle(color: Colors.white),
+                  icon: const Icon(
+                    FontAwesomeIcons.github,
+                    color: Colors.white,
+                  ),
+                  type: GFButtonType.transparent,
                 ),
               ),
               Container(
@@ -206,8 +220,12 @@ class HomeScreen extends StatelessWidget {
                 child: GFButton(
                   onPressed: () {},
                   text: "blade.ninja",
-                  icon: const Icon(Icons.web_asset_outlined),
-                  type: GFButtonType.outline2x,
+                  textStyle: const TextStyle(color: Colors.white),
+                  icon: const Icon(
+                    Icons.web_asset_outlined,
+                    color: Colors.white,
+                  ),
+                  type: GFButtonType.transparent,
                 ),
               ),
             ],
