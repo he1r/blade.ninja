@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'UIMain.dart';
-
+import 'SignUp.dart';
 // [0] name as it should be shown in the text input
 // [1] default LIKE search boolean
 // [2] column name on database
@@ -175,7 +175,14 @@ class HomeScreen extends StatelessWidget {
                 height: 40,
                 margin: const EdgeInsets.only(top: 50),
                 child: ElevatedButton(
-                  onPressed: null,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignUp(),
+                      ),
+                    );
+                  },
                   style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.transparent)),
