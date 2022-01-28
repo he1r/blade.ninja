@@ -1,3 +1,4 @@
+import 'package:databaza/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -123,6 +124,24 @@ class CustomDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => UIMain(4),
+                ),
+              );
+            },
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.only(left: 250),
+            leading: Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomeScreen(),
                 ),
               );
             },

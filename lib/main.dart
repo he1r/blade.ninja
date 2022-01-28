@@ -173,7 +173,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                 width: 120,
                 height: 40,
-                margin: const EdgeInsets.only(top: 50),
+                margin: const EdgeInsets.only(top: 50, left: 10),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -188,7 +188,7 @@ class HomeScreen extends StatelessWidget {
                           MaterialStateProperty.all<Color>(Colors.transparent)),
                   child: const Text(
                     "Sign Up !",
-                    style: TextStyle(color: Colors.lime, fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
               ),

@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: must_be_immutable
 class SignUp extends StatelessWidget {
@@ -69,7 +71,7 @@ class SignUp extends StatelessWidget {
           ),
           body: Column(children: <Widget>[
             Container(
-              margin: const EdgeInsets.only(left: 750),
+              margin: const EdgeInsets.only(left: 25),
               alignment: Alignment.center,
               width: 400,
               padding: const EdgeInsets.only(top: 200),
@@ -92,7 +94,7 @@ class SignUp extends StatelessWidget {
               width: 400,
               height: 100,
               alignment: Alignment.center,
-              margin: const EdgeInsets.only(left: 750),
+              margin: const EdgeInsets.only(left: 25),
               padding: const EdgeInsets.only(top: 20),
               child: const TextField(
                 style: TextStyle(
@@ -114,7 +116,7 @@ class SignUp extends StatelessWidget {
               width: 400,
               height: 100,
               alignment: Alignment.center,
-              margin: const EdgeInsets.only(left: 750),
+              margin: const EdgeInsets.only(left: 25),
               child: const TextField(
                 obscureText: true,
                 style: TextStyle(
@@ -133,7 +135,7 @@ class SignUp extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 30, left: 750),
+              margin: const EdgeInsets.only(top: 30, left: 25),
               width: 120,
               height: 40,
               child: ElevatedButton(
@@ -147,6 +149,49 @@ class SignUp extends StatelessWidget {
                 ),
               ),
             ),
+            Row(
+              children: [
+                const Padding(padding: EdgeInsets.only(top: 300, left: 775)),
+                Container(
+                  child: GFButton(
+                    onPressed: () {},
+                    text: "he1r",
+                    textStyle: const TextStyle(color: Colors.white),
+                    icon: const Icon(
+                      FontAwesomeIcons.github,
+                      color: Colors.white,
+                    ),
+                    type: GFButtonType.transparent,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 20),
+                  child: GFButton(
+                    onPressed: () {},
+                    text: "omega0verride",
+                    textStyle: const TextStyle(color: Colors.white),
+                    icon: const Icon(
+                      FontAwesomeIcons.github,
+                      color: Colors.white,
+                    ),
+                    type: GFButtonType.transparent,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 20),
+                  child: GFButton(
+                    onPressed: () {},
+                    text: "blade.ninja",
+                    textStyle: const TextStyle(color: Colors.white),
+                    icon: const Icon(
+                      Icons.web_asset_outlined,
+                      color: Colors.white,
+                    ),
+                    type: GFButtonType.transparent,
+                  ),
+                ),
+              ],
+            )
           ])),
     );
   }
