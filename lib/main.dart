@@ -183,12 +183,30 @@ class HomeScreen extends StatelessWidget {
           ),
           Row(
             children: [
-              Padding(padding: EdgeInsets.only(top: 300, right: 750)),
+              const Padding(padding: EdgeInsets.only(top: 300, left: 775)),
               Container(
                 child: GFButton(
                   onPressed: () {},
-                  text: "Twitter",
-                  icon: Icon(FontAwesomeIcons.twitterSquare),
+                  text: "he1r",
+                  icon: const Icon(FontAwesomeIcons.github),
+                  type: GFButtonType.outline2x,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 20),
+                child: GFButton(
+                  onPressed: () {},
+                  text: "omega0verride",
+                  icon: const Icon(FontAwesomeIcons.github),
+                  type: GFButtonType.outline2x,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 20),
+                child: GFButton(
+                  onPressed: () {},
+                  text: "blade.ninja",
+                  icon: const Icon(Icons.web_asset_outlined),
                   type: GFButtonType.outline2x,
                 ),
               ),
