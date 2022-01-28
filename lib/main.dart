@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'CustomDrawer.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // [0] name as it should be shown in the text input
 // [1] default LIKE search boolean
@@ -86,7 +88,10 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.black,
           title: Text('DataBaza',
               style: GoogleFonts.bebasNeue(
-                  color: Colors.white, fontSize: 50, letterSpacing: 14)),
+                  color: Colors.white,
+                  fontSize: 50,
+                  letterSpacing: 14,
+                  fontWeight: FontWeight.bold)),
         ),
         body: Column(children: <Widget>[
           Container(
@@ -172,6 +177,19 @@ class HomeScreen extends StatelessWidget {
                     "Sign Up",
                     style: TextStyle(color: Colors.green, fontSize: 20),
                   ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Padding(padding: EdgeInsets.only(top: 300, right: 750)),
+              Container(
+                child: GFButton(
+                  onPressed: () {},
+                  text: "Twitter",
+                  icon: Icon(FontAwesomeIcons.twitterSquare),
+                  type: GFButtonType.outline2x,
                 ),
               ),
             ],
