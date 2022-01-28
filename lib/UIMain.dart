@@ -166,9 +166,9 @@ class UIMain extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xff1f252e),
+          backgroundColor: Colors.black,
         ),
-        scaffoldBackgroundColor: const Color(0xff1f2836),
+        scaffoldBackgroundColor: Colors.indigo[900],
         inputDecorationTheme: const InputDecorationTheme(
           contentPadding: EdgeInsets.all(10),
           border:

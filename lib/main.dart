@@ -78,16 +78,75 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo[900],
-      drawer: CustomDrawer(),
-      appBar: AppBar(
-        toolbarHeight: 80,
-        centerTitle: true,
-        backgroundColor: Colors.black,
-        title: Text('DataBaza',
-            style: GoogleFonts.bebasNeue(
-                color: Colors.white, fontSize: 50, letterSpacing: 14)),
-      ),
-    );
+        backgroundColor: Colors.indigo[900],
+        drawer: CustomDrawer(),
+        appBar: AppBar(
+          toolbarHeight: 80,
+          centerTitle: true,
+          backgroundColor: Colors.black,
+          title: Text('DataBaza',
+              style: GoogleFonts.bebasNeue(
+                  color: Colors.white, fontSize: 50, letterSpacing: 14)),
+        ),
+        body: Column(children: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(left: 750),
+            alignment: Alignment.center,
+            width: 400,
+            padding: const EdgeInsets.only(top: 200),
+            child: const TextField(
+              style: TextStyle(
+                  fontSize: 18.0,
+                  height: 1.1,
+                  color: Colors.white,
+                  fontFamily: 'Akrobat-Bold'),
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.black54,
+                  hintStyle: TextStyle(
+                      color: Colors.white, fontFamily: 'Akrobat-Bold'),
+                  border: InputBorder.none,
+                  hintText: 'Username'),
+            ),
+          ),
+          Container(
+            width: 400,
+            height: 100,
+            alignment: Alignment.center,
+            margin: const EdgeInsets.only(left: 750),
+            padding: const EdgeInsets.only(top: 20),
+            child: const TextField(
+              obscureText: true,
+              style: TextStyle(
+                  fontSize: 18.0,
+                  height: 1.1,
+                  color: Colors.white,
+                  fontFamily: 'Akrobat-Bold'),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.black54,
+                hintStyle:
+                    TextStyle(color: Colors.white, fontFamily: 'Akrobat-Bold'),
+                border: InputBorder.none,
+                hintText: "Password",
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 30, left: 750),
+            width: 120,
+            height: 40,
+            child: ElevatedButton(
+              onPressed: null,
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.lightBlue)),
+              child: const Text(
+                "Sign In",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )
+        ]));
   }
 }
