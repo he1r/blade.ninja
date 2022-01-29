@@ -19,14 +19,6 @@ class SignUp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.indigo[900],
         inputDecorationTheme: const InputDecorationTheme(
           contentPadding: EdgeInsets.all(10),
-          border:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-          disabledBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-          enabledBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-          focusedBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.cyan)),
 //          focusedBorder: OutlineInputBorder(
 //                              borderSide: BorderSide(color: Colors.teal)
 //          ),
@@ -60,21 +52,20 @@ class SignUp extends StatelessWidget {
       home: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            toolbarHeight: 80,
+            toolbarHeight: 50,
+            centerTitle: true,
+            backgroundColor: Colors.black,
             title: Text('DataBaza',
                 style: GoogleFonts.bebasNeue(
                     color: Colors.white,
-                    fontSize: 50,
-                    letterSpacing: 14,
+                    fontSize: 30,
+                    letterSpacing: 7,
                     fontWeight: FontWeight.bold)),
-            centerTitle: true,
           ),
           body: Column(children: <Widget>[
             Container(
-              margin: const EdgeInsets.only(left: 25),
-              alignment: Alignment.center,
               width: 400,
-              padding: const EdgeInsets.only(top: 200),
+              padding: const EdgeInsets.only(top: 100, left: 100, right: 90),
               child: const TextField(
                 style: TextStyle(
                     fontSize: 18.0,
@@ -92,10 +83,7 @@ class SignUp extends StatelessWidget {
             ),
             Container(
               width: 400,
-              height: 100,
-              alignment: Alignment.center,
-              margin: const EdgeInsets.only(left: 25),
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 20, left: 100, right: 90),
               child: const TextField(
                 style: TextStyle(
                     fontSize: 18.0,
@@ -114,9 +102,7 @@ class SignUp extends StatelessWidget {
             ),
             Container(
               width: 400,
-              height: 100,
-              alignment: Alignment.center,
-              margin: const EdgeInsets.only(left: 25),
+              padding: const EdgeInsets.only(top: 20, left: 100, right: 90),
               child: const TextField(
                 obscureText: true,
                 style: TextStyle(
@@ -151,7 +137,7 @@ class SignUp extends StatelessWidget {
             ),
             Row(
               children: [
-                const Padding(padding: EdgeInsets.only(top: 300, left: 775)),
+                const Padding(padding: EdgeInsets.only(top: 255, left: 20)),
                 Container(
                   child: GFButton(
                     onPressed: () {},
@@ -165,7 +151,7 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 20),
+                  margin: const EdgeInsets.only(left: 5),
                   child: GFButton(
                     onPressed: () {},
                     text: "omega0verride",
@@ -178,7 +164,7 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 20),
+                  margin: const EdgeInsets.only(left: 5),
                   child: GFButton(
                     onPressed: () {},
                     text: "blade.ninja",

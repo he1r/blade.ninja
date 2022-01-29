@@ -80,115 +80,122 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.indigo[900],
         appBar: AppBar(
-          toolbarHeight: 80,
+          toolbarHeight: 50,
           centerTitle: true,
           backgroundColor: Colors.black,
           title: Text('DataBaza',
               style: GoogleFonts.bebasNeue(
                   color: Colors.white,
-                  fontSize: 50,
-                  letterSpacing: 14,
+                  fontSize: 30,
+                  letterSpacing: 7,
                   fontWeight: FontWeight.bold)),
         ),
         body: Column(children: <Widget>[
+          Row(
+            children: [
+              Container(
+                width: 400,
+                padding: const EdgeInsets.only(top: 150, left: 100, right: 90),
+                child: const SingleChildScrollView(
+                  child: TextField(
+                    style: TextStyle(
+                        fontSize: 18.0,
+                        height: 1.1,
+                        color: Colors.white,
+                        fontFamily: 'Akrobat-Bold'),
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.black54,
+                        hintStyle: TextStyle(
+                            color: Colors.white, fontFamily: 'Akrobat-Bold'),
+                        border: InputBorder.none,
+                        hintText: 'Username'),
+                  ),
+                ),
+              )
+            ],
+          ),
           Container(
-            margin: const EdgeInsets.only(left: 25),
-            alignment: Alignment.center,
             width: 400,
-            padding: const EdgeInsets.only(top: 200),
-            child: const TextField(
-              style: TextStyle(
-                  fontSize: 18.0,
-                  height: 1.1,
-                  color: Colors.white,
-                  fontFamily: 'Akrobat-Bold'),
-              decoration: InputDecoration(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(top: 20, left: 95, right: 95),
+            child: const SingleChildScrollView(
+              child: TextField(
+                obscureText: true,
+                style: TextStyle(
+                    fontSize: 18.0,
+                    height: 1.1,
+                    color: Colors.white,
+                    fontFamily: 'Akrobat-Bold'),
+                decoration: InputDecoration(
                   filled: true,
                   fillColor: Colors.black54,
                   hintStyle: TextStyle(
                       color: Colors.white, fontFamily: 'Akrobat-Bold'),
                   border: InputBorder.none,
-                  hintText: 'Username'),
-            ),
-          ),
-          Container(
-            width: 400,
-            height: 100,
-            alignment: Alignment.center,
-            margin: const EdgeInsets.only(left: 25),
-            padding: const EdgeInsets.only(top: 20),
-            child: const TextField(
-              obscureText: true,
-              style: TextStyle(
-                  fontSize: 18.0,
-                  height: 1.1,
-                  color: Colors.white,
-                  fontFamily: 'Akrobat-Bold'),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.black54,
-                hintStyle:
-                    TextStyle(color: Colors.white, fontFamily: 'Akrobat-Bold'),
-                border: InputBorder.none,
-                hintText: "Password",
+                  hintText: "Password",
+                ),
               ),
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 30, left: 25),
+            margin: const EdgeInsets.only(top: 30),
             width: 120,
-            height: 40,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => UIMain(0),
-                  ),
-                );
-              },
-              style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.lightBlue)),
-              child: const Text(
-                "Sign In",
-                style: TextStyle(color: Colors.white, fontSize: 20),
+            child: SingleChildScrollView(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UIMain(0),
+                    ),
+                  );
+                },
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.lightBlue)),
+                child: const Text(
+                  "Sign In",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
               ),
             ),
           ),
           Row(
             children: [
-              const SizedBox(
-                width: 10,
-              ),
               Container(
-                margin: const EdgeInsets.only(left: 800, top: 50),
-                child: const Text(
-                  "Don't have an account?",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                margin: const EdgeInsets.only(left: 60, top: 30),
+                child: const SingleChildScrollView(
+                  child: Text(
+                    "Don't have an account?",
+                    style: TextStyle(color: Colors.white, fontSize: 17),
+                  ),
                 ),
               ),
               Container(
                 width: 120,
                 height: 40,
-                margin: const EdgeInsets.only(top: 50, left: 10),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SignUp(),
-                      ),
-                    );
-                  },
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.transparent)),
-                  child: const Text(
-                    "Sign Up !",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                margin: const EdgeInsets.only(top: 30, left: 10),
+                child: SingleChildScrollView(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUp(),
+                        ),
+                      );
+                    },
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Colors.transparent)),
+                    child: const Text(
+                      "Sign Up !",
+                      style: TextStyle(color: Colors.white, fontSize: 17),
+                    ),
                   ),
                 ),
               ),
@@ -196,43 +203,49 @@ class HomeScreen extends StatelessWidget {
           ),
           Row(
             children: [
-              const Padding(padding: EdgeInsets.only(top: 300, left: 775)),
+              const Padding(padding: EdgeInsets.only(top: 190, left: 20)),
               Container(
-                child: GFButton(
-                  onPressed: () {},
-                  text: "he1r",
-                  textStyle: const TextStyle(color: Colors.white),
-                  icon: const Icon(
-                    FontAwesomeIcons.github,
-                    color: Colors.white,
+                child: SingleChildScrollView(
+                  child: GFButton(
+                    onPressed: () {},
+                    text: "he1r",
+                    textStyle: const TextStyle(color: Colors.white),
+                    icon: const Icon(
+                      FontAwesomeIcons.github,
+                      color: Colors.white,
+                    ),
+                    type: GFButtonType.transparent,
                   ),
-                  type: GFButtonType.transparent,
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(left: 20),
-                child: GFButton(
-                  onPressed: () {},
-                  text: "omega0verride",
-                  textStyle: const TextStyle(color: Colors.white),
-                  icon: const Icon(
-                    FontAwesomeIcons.github,
-                    color: Colors.white,
+                margin: const EdgeInsets.only(left: 5),
+                child: SingleChildScrollView(
+                  child: GFButton(
+                    onPressed: () {},
+                    text: "omega0verride",
+                    textStyle: const TextStyle(color: Colors.white),
+                    icon: const Icon(
+                      FontAwesomeIcons.github,
+                      color: Colors.white,
+                    ),
+                    type: GFButtonType.transparent,
                   ),
-                  type: GFButtonType.transparent,
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(left: 20),
-                child: GFButton(
-                  onPressed: () {},
-                  text: "blade.ninja",
-                  textStyle: const TextStyle(color: Colors.white),
-                  icon: const Icon(
-                    Icons.web_asset_outlined,
-                    color: Colors.white,
+                margin: const EdgeInsets.only(left: 5),
+                child: SingleChildScrollView(
+                  child: GFButton(
+                    onPressed: () {},
+                    text: "blade.ninja",
+                    textStyle: const TextStyle(color: Colors.white),
+                    icon: const Icon(
+                      Icons.web_asset_outlined,
+                      color: Colors.white,
+                    ),
+                    type: GFButtonType.transparent,
                   ),
-                  type: GFButtonType.transparent,
                 ),
               ),
             ],
