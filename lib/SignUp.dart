@@ -141,7 +141,7 @@ class SignUp extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(left: 20),
                 child: GFButton(
                   onPressed: () {},
                   text: "he1r",
