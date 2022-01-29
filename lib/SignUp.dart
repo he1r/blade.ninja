@@ -50,135 +50,139 @@ class SignUp extends StatelessWidget {
         ),
       ),
       home: Scaffold(
-          resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            toolbarHeight: 50,
-            centerTitle: true,
-            backgroundColor: Colors.black,
-            title: Text('DataBaza',
-                style: GoogleFonts.bebasNeue(
-                    color: Colors.white,
-                    fontSize: 30,
-                    letterSpacing: 7,
-                    fontWeight: FontWeight.bold)),
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          toolbarHeight: 50,
+          centerTitle: true,
+          backgroundColor: Colors.black,
+          title: Text('DataBaza',
+              style: GoogleFonts.bebasNeue(
+                  color: Colors.white,
+                  fontSize: 30,
+                  letterSpacing: 7,
+                  fontWeight: FontWeight.bold)),
+        ),
+        body: Center(
+            child: SingleChildScrollView(
+                child: Column(children: [
+          Container(
+            width: 300,
+            child: const TextField(
+              style: TextStyle(
+                  fontSize: 18.0,
+                  height: 1.1,
+                  color: Colors.white,
+                  fontFamily: 'Akrobat-Bold'),
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.black54,
+                  hintStyle: TextStyle(
+                      color: Colors.white, fontFamily: 'Akrobat-Bold'),
+                  border: InputBorder.none,
+                  hintText: 'Username'),
+            ),
           ),
-          body: Column(children: <Widget>[
-            Container(
-              width: 400,
-              padding: const EdgeInsets.only(top: 100, left: 100, right: 90),
-              child: const TextField(
-                style: TextStyle(
-                    fontSize: 18.0,
-                    height: 1.1,
+          Container(
+            width: 300,
+            padding: const EdgeInsets.only(top: 10),
+            child: const TextField(
+              style: TextStyle(
+                  fontSize: 18.0,
+                  height: 1.1,
+                  color: Colors.white,
+                  fontFamily: 'Akrobat-Bold'),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.black54,
+                hintStyle:
+                    TextStyle(color: Colors.white, fontFamily: 'Akrobat-Bold'),
+                border: InputBorder.none,
+                hintText: "Email",
+              ),
+            ),
+          ),
+          Container(
+            width: 300,
+            padding: const EdgeInsets.only(top: 10),
+            child: const TextField(
+              obscureText: true,
+              style: TextStyle(
+                  fontSize: 18.0,
+                  height: 1.1,
+                  color: Colors.white,
+                  fontFamily: 'Akrobat-Bold'),
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.black54,
+                hintStyle:
+                    TextStyle(color: Colors.white, fontFamily: 'Akrobat-Bold'),
+                border: InputBorder.none,
+                hintText: "Password",
+              ),
+            ),
+          ),
+          Container(
+            width: 120,
+            padding: const EdgeInsets.only(top: 30),
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.lightBlue)),
+              child: const Text(
+                "Sign Up",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+          Row(
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 20),
+                child: GFButton(
+                  onPressed: () {},
+                  text: "he1r",
+                  textStyle: const TextStyle(color: Colors.white),
+                  icon: const Icon(
+                    FontAwesomeIcons.github,
                     color: Colors.white,
-                    fontFamily: 'Akrobat-Bold'),
-                decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.black54,
-                    hintStyle: TextStyle(
-                        color: Colors.white, fontFamily: 'Akrobat-Bold'),
-                    border: InputBorder.none,
-                    hintText: 'Username'),
+                  ),
+                  type: GFButtonType.transparent,
+                ),
               ),
-            ),
-            Container(
-              width: 400,
-              padding: const EdgeInsets.only(top: 20, left: 100, right: 90),
-              child: const TextField(
-                style: TextStyle(
-                    fontSize: 18.0,
-                    height: 1.1,
+              Container(
+                margin: const EdgeInsets.only(left: 5),
+                child: GFButton(
+                  onPressed: () {},
+                  text: "omega0verride",
+                  textStyle: const TextStyle(color: Colors.white),
+                  icon: const Icon(
+                    FontAwesomeIcons.github,
                     color: Colors.white,
-                    fontFamily: 'Akrobat-Bold'),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.black54,
-                  hintStyle: TextStyle(
-                      color: Colors.white, fontFamily: 'Akrobat-Bold'),
-                  border: InputBorder.none,
-                  hintText: "Email",
+                  ),
+                  type: GFButtonType.transparent,
                 ),
               ),
-            ),
-            Container(
-              width: 400,
-              padding: const EdgeInsets.only(top: 20, left: 100, right: 90),
-              child: const TextField(
-                obscureText: true,
-                style: TextStyle(
-                    fontSize: 18.0,
-                    height: 1.1,
+              Container(
+                margin: const EdgeInsets.only(left: 5),
+                child: GFButton(
+                  onPressed: () {},
+                  text: "blade.ninja",
+                  textStyle: const TextStyle(color: Colors.white),
+                  icon: const Icon(
+                    Icons.web_asset_outlined,
                     color: Colors.white,
-                    fontFamily: 'Akrobat-Bold'),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.black54,
-                  hintStyle: TextStyle(
-                      color: Colors.white, fontFamily: 'Akrobat-Bold'),
-                  border: InputBorder.none,
-                  hintText: "Password",
+                  ),
+                  type: GFButtonType.transparent,
                 ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 30, left: 25),
-              width: 120,
-              height: 40,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.lightBlue)),
-                child: const Text(
-                  "Sign Up",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ),
-            ),
-            Row(
-              children: [
-                const Padding(padding: EdgeInsets.only(top: 255, left: 20)),
-                Container(
-                  child: GFButton(
-                    onPressed: () {},
-                    text: "he1r",
-                    textStyle: const TextStyle(color: Colors.white),
-                    icon: const Icon(
-                      FontAwesomeIcons.github,
-                      color: Colors.white,
-                    ),
-                    type: GFButtonType.transparent,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 5),
-                  child: GFButton(
-                    onPressed: () {},
-                    text: "omega0verride",
-                    textStyle: const TextStyle(color: Colors.white),
-                    icon: const Icon(
-                      FontAwesomeIcons.github,
-                      color: Colors.white,
-                    ),
-                    type: GFButtonType.transparent,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 5),
-                  child: GFButton(
-                    onPressed: () {},
-                    text: "blade.ninja",
-                    textStyle: const TextStyle(color: Colors.white),
-                    icon: const Icon(
-                      Icons.web_asset_outlined,
-                      color: Colors.white,
-                    ),
-                    type: GFButtonType.transparent,
-                  ),
-                ),
-              ],
-            )
-          ])),
+            ],
+          ),
+        ]))),
+      ),
     );
   }
 }
