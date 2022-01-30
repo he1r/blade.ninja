@@ -133,7 +133,7 @@ class CustomDrawer extends StatelessWidget {
             height: 50,
           ),
           ListTile(
-            contentPadding: EdgeInsets.only(left: 250),
+            contentPadding: const EdgeInsets.only(left: 250),
             leading: const Icon(
               Icons.logout,
               color: Colors.white,

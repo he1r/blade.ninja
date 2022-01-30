@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
         child: SingleChildScrollView(
             child: Column(children: <Widget>[
           Container(
-            width: 200,
+            width: 300,
             child: const TextField(
               style: TextStyle(
                   fontSize: 18.0,
@@ -114,7 +114,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Container(
-            width: 200,
+            width: 300,
             padding: const EdgeInsets.only(top: 10),
             child: const TextField(
               obscureText: true,
@@ -183,10 +183,11 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 100),
           Row(
             children: [
-              const Padding(padding: EdgeInsets.only(top: 190, left: 20)),
               Container(
+                padding: const EdgeInsets.only(left: 20),
                 child: GFButton(
                   onPressed: () {},
                   text: "he1r",
