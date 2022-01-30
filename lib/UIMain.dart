@@ -1,20 +1,19 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'CustomDrawer.dart';
 import 'dataSource.dart';
 import 'main.dart';
-import 'dataSource.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
 class UIMain extends StatefulWidget {
-  const UIMain(var dbIndex, {Key? key}) : super(key: key);
+  var dbIndex = 0;
+
+  UIMain(var this.dbIndex, {Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return MainState(0);
+    return MainState(dbIndex);
   }
 }
 

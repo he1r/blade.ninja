@@ -4,6 +4,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'UIMain.dart';
 import 'SignUp.dart';
+
 // [0] name as it should be shown in the text input
 // [1] default LIKE search boolean
 // [2] column name on database

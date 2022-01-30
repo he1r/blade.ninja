@@ -1,7 +1,6 @@
 import 'package:databaza/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'UIMain.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -65,7 +64,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const UIMain(1),
+                  builder: (context) => UIMain(1),
                 ),
               );
             },
