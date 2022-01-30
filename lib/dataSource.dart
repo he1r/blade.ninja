@@ -57,9 +57,9 @@ class JSONDataSource extends DataGridSource {
       _gridColumnsList.add(
         GridColumn(
             columnName: h.toString(),
-            autoFitPadding: EdgeInsets.all(12.0),
+            autoFitPadding: const EdgeInsets.all(12.0),
             label: Container(
-                padding: EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(12.0),
                 alignment: Alignment.center,
                 child: Text(
                   h.toString(),
@@ -184,9 +184,11 @@ class JSONDataSource extends DataGridSource {
     return d;
   }
 
-
   void getExampleDataFromAPI() async {
-    getData(url_: 'https://blade.ninja/update', requestJSON: {"db": 1, "Emri": [1, "a"]} );
+    getData(url_: 'https://blade.ninja/update', requestJSON: {
+      "db": 1,
+      "Emri": [1, "a"]
+    });
   }
 
   // make get request to get json data
@@ -198,7 +200,6 @@ class JSONDataSource extends DataGridSource {
     });
   }
 
-
   @override
   List<DataGridRow> get rows => _dataRows;
 
@@ -206,15 +207,15 @@ class JSONDataSource extends DataGridSource {
   DataGridRowAdapter buildRow(DataGridRow row) {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((e) {
-          return Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.all(12.0),
-            child: Text(
-              e.value.toString(),
+      return Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(12.0),
+        child: Text(
+          e.value.toString(),
           style: rowsTextStyle,
         ),
-          );
-        }).toList());
+      );
+    }).toList());
   }
 
   List<GridColumn> get gridColumnsList => _gridColumnsList;

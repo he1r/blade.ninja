@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'CustomDrawer.dart';
@@ -24,10 +23,10 @@ class MainState extends State<UIMain> {
   var checkboxVal = 0; // temporary
   late JSONDataSource dataSource;
 
-
   MainState(this.dbIndex) {
-    dataSource =
-        JSONDataSource(const TextStyle(color: Colors.white), const TextStyle(
+    dataSource = JSONDataSource(
+        const TextStyle(color: Colors.white),
+        const TextStyle(
             color: Colors.white)); // create a grid data source with the data
     // dataSource.getLocalExample(); // get the local data
     fields = databazat[dbIndex][1];
@@ -36,7 +35,6 @@ class MainState extends State<UIMain> {
     }
   }
 
-
   Map generateJson() {
     final Map<String, Object> jsonData;
     jsonData = {
@@ -44,17 +42,17 @@ class MainState extends State<UIMain> {
       // convention was set to start from 1 because of the web version
     };
     for (int i = 0; i < fields.length; i++) {
-      jsonData[fields[i][2].toString()] =
-      [fields[i][1] + checkboxVal, controllers[i].text];
+      jsonData[fields[i][2].toString()] = [
+        fields[i][1] + checkboxVal,
+        controllers[i].text
+      ];
     }
     print(jsonData);
     return jsonData;
   }
 
   //REQUEST DATA FROM SERVER
-  void data() {
-
-  }
+  void data() {}
 
   void setDateText(var controller, var date) {
     controller.text = date;
@@ -71,9 +69,7 @@ class MainState extends State<UIMain> {
       startDate = DateTime.parse(controller.text);
     }
     // ignore: empty_catches
-    on Exception {
-
-    }
+    on Exception {}
 
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -98,7 +94,10 @@ class MainState extends State<UIMain> {
             children: [
               Row(
                 children: [
-                  const SizedBox(width: 4, height: 1,),
+                  const SizedBox(
+                    width: 4,
+                    height: 1,
+                  ),
                   // simple space
                   Expanded(
                     //                        padding: const EdgeInsets.all(1),
@@ -112,14 +111,16 @@ class MainState extends State<UIMain> {
                       controller: controllers[i],
                     ),
                   ),
-                  const SizedBox(width: 60, height: 2,),
+                  const SizedBox(
+                    width: 60,
+                    height: 2,
+                  ),
 
                   // space where the button is meant to go
                 ],
               ),
               Row(
                 children: [
-
                   Expanded(
                     // ignore: deprecated_member_use
                     child: FlatButton(
@@ -135,36 +136,49 @@ class MainState extends State<UIMain> {
 //                    yourUpdateDateFunction(date);
 //                        onPressed: () => _selectDate(context, controllers[i]),
                       child: const Text(""),
-
                     ),
                   ),
-                  const SizedBox(width: 60, height: 2,),
+                  const SizedBox(
+                    width: 60,
+                    height: 2,
+                  ),
                 ],
               ),
             ],
           ),
         );
-      }
-      else {
+      } else {
         widgets_list.add(Row(
           children: [
-            const SizedBox(width: 4, height: 1,),
+            const SizedBox(
+              width: 4,
+              height: 20,
+            ),
             // simple space
             Expanded(
               //                        padding: const EdgeInsets.all(1),
               child: TextField(
+                style: const TextStyle(
+                    fontSize: 15.0,
+                    height: 0.9,
+                    color: Colors.white,
+                    fontFamily: 'Akrobat-Bold'),
                 decoration: InputDecoration(
                   labelText: fields[i][0].toString(),
+                  alignLabelWithHint: true,
                 ),
                 controller: controllers[i],
               ),
             ),
-            const SizedBox(width: 60, height: 2,),
+            const SizedBox(
+              width: 60,
+              height: 2,
+            ),
             // space where the button is meant to go
           ],
-        )
-        );
-      };
+        ));
+      }
+      ;
     }
     return widgets_list;
   }
@@ -176,17 +190,17 @@ class MainState extends State<UIMain> {
         appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xff1f252e),
         ),
-        scaffoldBackgroundColor: Color(0xff1f2836),
+        scaffoldBackgroundColor: const Color(0xff1f2836),
         inputDecorationTheme: const InputDecorationTheme(
           contentPadding: EdgeInsets.all(10),
-          border:
-          UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-          disabledBorder:
-          UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-          enabledBorder:
-          UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+          border: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.blueGrey, width: 20)),
+          disabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.blueGrey)),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.blueGrey)),
           focusedBorder:
-          UnderlineInputBorder(borderSide: BorderSide(color: Colors.cyan)),
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
 //          focusedBorder: OutlineInputBorder(
 //                              borderSide: BorderSide(color: Colors.teal)
 //          ),
@@ -197,7 +211,6 @@ class MainState extends State<UIMain> {
             fontSize: 18,
             decorationColor: Colors.red,
           ),
-
         ),
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Colors.white,
@@ -218,110 +231,101 @@ class MainState extends State<UIMain> {
 //          headline6: TextStyle(color: Colors.white),
         ),
       ),
-
-
       home: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             centerTitle: true,
             title: Text(databazat[dbIndex][0].toString()),
           ),
-          drawer: CustomDrawer(),
+          drawer: const CustomDrawer(),
           body: Padding(
               padding: const EdgeInsets.all(2),
               child: SingleChildScrollView(
                   child: Column(
-                    children: <Widget>[
-                      ...generateInputFields(context), // INPUT FIELDS
+                children: <Widget>[
+                  ...generateInputFields(context), // INPUT FIELDS
 
-                      const SizedBox(height: 20), // space for buttons
+                  const SizedBox(height: 20), // space for buttons
 
-
-                      Row(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.all(10),
-                            height: 40.0,
-                            width: 40.0,
-                            child: ElevatedButton.icon(
-                              icon: const Icon(
-                                Icons.clear,
-                                color: Colors.white,
-                                size: 25.0,
-                              ),
-                              label: Text(''),
-                              style: ElevatedButton.styleFrom(
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.only(left: 6),
-                                primary: const Color(0xff0b51d09),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    side: const BorderSide(
-                                        color: Color(0xff0b51d09))),
-                              ),
-                              onPressed: () {
-                                for (int i = 0; i < fields.length; i++) {
-                                  controllers[i].text = "";
-                                }
-                              },
-                            ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        height: 40.0,
+                        width: 40.0,
+                        child: ElevatedButton.icon(
+                          icon: const Icon(
+                            Icons.clear,
+                            color: Colors.white,
+                            size: 25.0,
                           ),
-                          Container(
-                            margin: EdgeInsets.all(10),
-                            height: 40.0,
-                            width: 40.0,
-                            child: ElevatedButton.icon(
-                              icon: const Icon(
-                                Icons.search,
-                                color: Colors.white,
-                                size: 25.0,
-                              ),
-                              label: Text(''),
-                              style: ElevatedButton.styleFrom(
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.only(left: 6),
-                                primary: const Color(0xff2769c4),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    side: const BorderSide(
-                                        color: Color(0xff2769c4))),
-                              ),
-                              onPressed: () =>
-                                  dataSource.getData(
-                                      url_: 'https://blade.ninja/update',
-                                      requestJSON: generateJson()),
-                            ),
+                          label: const Text(''),
+                          style: ElevatedButton.styleFrom(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.only(left: 6),
+                            primary: const Color(0xff0b51d09),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
+                                side: const BorderSide(
+                                    color: Color(0xff0b51d09))),
                           ),
-                        ],
-                      ),
-                      SfDataGridTheme(
-                        data: SfDataGridThemeData(
-                            gridLineColor: const Color(0xff009889),
-                            headerColor: const Color(0xff009889)
+                          onPressed: () {
+                            for (int i = 0; i < fields.length; i++) {
+                              controllers[i].text = "";
+                            }
+                          },
                         ),
-                        child: SfDataGrid(
-                          // set the data source
-                          source: dataSource,
-                          // set the column width by calculating the max size among the header cell and among the cells in column.
-                          columnWidthMode: ColumnWidthMode.auto,
-                          // make sure the property above (columnWidthMode.auto) is applied in all rows
-                          columnWidthCalculationRange: ColumnWidthCalculationRange
-                              .allRows,
-                          // add the columns array to the grid
-                          columns: dataSource.gridColumnsList,
-                          // *note that whatever changes you do to the data do not change
-                          // the array/list or assign another list to columns property
-                          // because it will change the address and the changes will
-                          // not be reflected, this reference should never change, modify
-                          // the list directly*
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(10),
+                        height: 40.0,
+                        width: 40.0,
+                        child: ElevatedButton.icon(
+                          icon: const Icon(
+                            Icons.search,
+                            color: Colors.white,
+                            size: 25.0,
+                          ),
+                          label: const Text(''),
+                          style: ElevatedButton.styleFrom(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.only(left: 6),
+                            primary: const Color(0xff2769c4),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
+                                side:
+                                    const BorderSide(color: Color(0xff2769c4))),
+                          ),
+                          onPressed: () => dataSource.getData(
+                              url_: 'https://blade.ninja/update',
+                              requestJSON: generateJson()),
                         ),
                       ),
                     ],
-                  ))
-          )
-      ),
-
-
+                  ),
+                  SfDataGridTheme(
+                    data: SfDataGridThemeData(
+                        gridLineColor: const Color(0xff009889),
+                        headerColor: const Color(0xff009889)),
+                    child: SfDataGrid(
+                      // set the data source
+                      source: dataSource,
+                      // set the column width by calculating the max size among the header cell and among the cells in column.
+                      columnWidthMode: ColumnWidthMode.auto,
+                      // make sure the property above (columnWidthMode.auto) is applied in all rows
+                      columnWidthCalculationRange:
+                          ColumnWidthCalculationRange.allRows,
+                      // add the columns array to the grid
+                      columns: dataSource.gridColumnsList,
+                      // *note that whatever changes you do to the data do not change
+                      // the array/list or assign another list to columns property
+                      // because it will change the address and the changes will
+                      // not be reflected, this reference should never change, modify
+                      // the list directly*
+                    ),
+                  ),
+                ],
+              )))),
     );
   }
 }
