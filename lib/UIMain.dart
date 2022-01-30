@@ -1,20 +1,26 @@
-// ignore_for_file: avoid_print
-
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'CustomDrawer.dart';
+import 'dataSource.dart';
 import 'main.dart';
+import 'dataSource.dart';
 
-// ignore: must_be_immutable
 class UIMain extends StatelessWidget {
-  // ignore: prefer_typing_uninitialized_variables
+
   var fields;
-  var controllers = [];
-  var dbIndex = 0;
-  var checkboxVal = 0; // temporary
+  var controllers=[];
+  var dbIndex=0;
+  var checkboxVal=0; // temporary
+  late JSONDataSource dataSource;
 
   UIMain(this.dbIndex, {Key? key}) : super(key: key) {
+
+    dataSource =
+        JSONDataSource(); // create a grid data source with the data
+    // dataSource.getLocalExample(); // get the local data
     fields = databazat[dbIndex][1];
     for (int i = 0; i < fields.length; i++) {
       controllers.add(TextEditingController(text: ""));
@@ -27,43 +33,35 @@ class UIMain extends StatelessWidget {
       "db": dbIndex,
     };
     for (int i = 0; i < fields.length; i++) {
-      jsonData[fields[i][2].toString()] = [
-        fields[i][1] + checkboxVal,
-        controllers[i].text
-      ];
+      jsonData[fields[i][2].toString()]=[fields[i][1]+checkboxVal, controllers[i].text];
     }
     print(jsonData);
     return jsonData;
   }
 
   //REQUEST DATA FROM SERVER
-  void data() async {
-    var url = Uri.parse('https://blade.ninja/update');
-    var body = jsonEncode(generateJson());
-    post(url,
-//    headers: {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"},
-            body: jsonEncode(body))
-        .then((Response response) {
-      print(response.body);
-    });
+  void data() {
+    dataSource.getData(url_: 'https://blade.ninja/update', requestJSON:generateJson());
   }
 
-  void setDateText(var controller, var date) {
-    controller.text = date;
+  void setDateText(var controller, var date){
+    controller.text=date;
   }
 
   Future<void> _selectDate(BuildContext context, var controller) async {
-    var selectedDate = DateTime.now().toString();
+    var selectedDate=DateTime.now().toString();
     if (controller.text.isNotEmpty) {
       selectedDate = controller.text;
-      print("----->>>>>" + selectedDate);
+      print("----->>>>>"+selectedDate);
     }
     var startDate = DateTime.now();
     try {
       startDate = DateTime.parse(controller.text);
     }
     // ignore: empty_catches
-    on Exception {}
+    on Exception{
+
+    }
 
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -72,26 +70,23 @@ class UIMain extends StatelessWidget {
       lastDate: DateTime.now(),
     );
 
-    if (picked != null) {
+    if (picked != null){
       setDateText(controller, picked.toString().split(" ")[0]);
-      print("---->>" + picked.toString());
+      print("---->>"+picked.toString());
       selectedDate = picked.toString();
     }
   }
 
-  List<Widget> generateInputFields(BuildContext context) {
+  List<Widget> generateInputFields(BuildContext context){
     List<Widget> data = [];
-    for (int i = 0; i < fields.length; i++) {
+    for( int i = 0 ; i < fields.length ; i++) {
       if (fields[i][2] == 'Datelindja') {
         data.add(
           Stack(
             children: [
               Row(
                 children: [
-                  const SizedBox(
-                    width: 4,
-                    height: 1,
-                  ),
+                  const SizedBox(width: 4, height: 1,),
                   // simple space
                   Expanded(
                     //                        padding: const EdgeInsets.all(1),
@@ -105,39 +100,43 @@ class UIMain extends StatelessWidget {
                       controller: controllers[i],
                     ),
                   ),
-                  const SizedBox(
-                    width: 60,
-                    height: 2,
-                  ),
+                  const SizedBox(width: 60, height: 2,),
 
                   // space where the button is meant to go
                 ],
               ),
               Row(
                 children: [
+
                   Expanded(
                     // ignore: deprecated_member_use
                     child: FlatButton(
-                      onPressed: () => _selectDate(context, controllers[i]),
+                      onPressed: () async {
+                        final date = await showDatePicker(
+                          initialEntryMode: DatePickerEntryMode.input,
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                        );
+                      },
+//                    yourUpdateDateFunction(date);
+//                        onPressed: () => _selectDate(context, controllers[i]),
                       child: const Text(""),
+
                     ),
                   ),
-                  const SizedBox(
-                    width: 60,
-                    height: 2,
-                  ),
+                  const SizedBox(width: 60, height: 2,),
                 ],
               ),
             ],
           ),
         );
-      } else {
+      }
+      else {
         data.add(Row(
           children: [
-            const SizedBox(
-              width: 4,
-              height: 1,
-            ),
+            const SizedBox(width: 4, height: 1,),
             // simple space
             Expanded(
               //                        padding: const EdgeInsets.all(1),
@@ -148,14 +147,12 @@ class UIMain extends StatelessWidget {
                 controller: controllers[i],
               ),
             ),
-            const SizedBox(
-              width: 60,
-              height: 2,
-            ),
+            const SizedBox(width: 60, height: 2,),
             // space where the button is meant to go
           ],
-        ));
-      }
+        )
+        );
+      };
     }
     return data;
   }
@@ -166,19 +163,19 @@ class UIMain extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xff1f252e),
         ),
-        scaffoldBackgroundColor: Colors.indigo[900],
+        scaffoldBackgroundColor: Color(0xff1f2836),
         inputDecorationTheme: const InputDecorationTheme(
           contentPadding: EdgeInsets.all(10),
           border:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+          UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           disabledBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+          UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           enabledBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+          UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           focusedBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.cyan)),
+          UnderlineInputBorder(borderSide: BorderSide(color: Colors.cyan)),
 //          focusedBorder: OutlineInputBorder(
 //                              borderSide: BorderSide(color: Colors.teal)
 //          ),
@@ -189,6 +186,7 @@ class UIMain extends StatelessWidget {
             fontSize: 18,
             decorationColor: Colors.red,
           ),
+
         ),
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Colors.white,
@@ -209,6 +207,8 @@ class UIMain extends StatelessWidget {
 //          headline6: TextStyle(color: Colors.white),
         ),
       ),
+
+
       home: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
@@ -224,10 +224,11 @@ class UIMain extends StatelessWidget {
 
                   const SizedBox(height: 20), // space for buttons
 
+
                   Row(
                     children: [
                       Container(
-                        margin: const EdgeInsets.all(10),
+                        margin: EdgeInsets.all(10),
                         height: 40.0,
                         width: 40.0,
                         child: ElevatedButton.icon(
@@ -236,25 +237,20 @@ class UIMain extends StatelessWidget {
                             color: Colors.white,
                             size: 25.0,
                           ),
-                          label: const Text(''),
+                          label: Text(''),
                           style: ElevatedButton.styleFrom(
                             alignment: Alignment.center,
-                            padding: const EdgeInsets.only(left: 6),
-                            primary: const Color(0xff0b51d09),
+                            padding:  EdgeInsets.only(left: 6),
+                            primary:  const Color(0xff0b51d09),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0),
-                                side: const BorderSide(
-                                    color: Color(0xff0b51d09))),
+                                side: const BorderSide(color: Color(0xff0b51d09))),
                           ),
-                          onPressed: () {
-                            for (int i = 0; i < fields.length; i++) {
-                              controllers[i].text = "";
-                            }
-                          },
+                          onPressed: (){for(int i=0; i<fields.length; i++){controllers[i].text="";}},
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.all(10),
+                        margin: EdgeInsets.all(10),
                         height: 40.0,
                         width: 40.0,
                         child: ElevatedButton.icon(
@@ -263,23 +259,38 @@ class UIMain extends StatelessWidget {
                             color: Colors.white,
                             size: 25.0,
                           ),
-                          label: const Text(''),
+                          label: Text(''),
                           style: ElevatedButton.styleFrom(
                             alignment: Alignment.center,
-                            padding: const EdgeInsets.only(left: 6),
-                            primary: const Color(0xff2769c4),
+                            padding:  EdgeInsets.only(left: 6),
+                            primary:  const Color(0xff2769c4),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50.0),
-                                side:
-                                    const BorderSide(color: Color(0xff2769c4))),
+                                side: const BorderSide(color: Color(0xff2769c4))),
                           ),
                           onPressed: data,
                         ),
                       ),
                     ],
                   ),
+                  SfDataGrid(
+                    // set the data source
+                    source: dataSource,
+                    // set the column width by calculating the max size among the header cell and among the cells in column.
+                    columnWidthMode: ColumnWidthMode.auto,
+                    // make sure the property above (columnWidthMode.auto) is applied in all rows
+                    columnWidthCalculationRange: ColumnWidthCalculationRange.allRows,
+                    // add the columns array to the grid
+                    columns: dataSource.gridColumnsList,
+                    // *note that whatever changes you do to the data do not change
+                    // the array/list or assign another list to columns property
+                    // because it will change the address and the changes will
+                    // not be reflected, this reference should never change, modify
+                    // the list directly*
+                  ),
                 ],
               ))),
+
     );
   }
 }
