@@ -5,10 +5,10 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class JSONDataSource extends DataGridSource {
   // create an empty grid column list, it will be populated with data later on
-  List<GridColumn> gridColumnsList = [];
+  final List<GridColumn> _gridColumnsList = [];
 
   // create empty grid row list, it will be populated with data later on
-  List<DataGridRow> dataRows = [];
+  final List<DataGridRow> _dataRows = [];
 
   // *note that whatever changes you do to the data do not change
   // the array/list or assign another list to columns property
@@ -16,29 +16,35 @@ class JSONDataSource extends DataGridSource {
   // not be reflected, this reference should never change, modify
   // the list directly*
 
-  var data; // variable to hold json data
+  var _data; // variable to hold json data
+  TextStyle rowsTextStyle = const TextStyle(color: Colors.white);
+  TextStyle headersTextStyle = const TextStyle(color: Colors.white);
 
-  JSONDataSource([var data]) {
+  JSONDataSource([var rowsTextStyle, var headersTextStyle, var data]) {
+    if (rowsTextStyle != null) {
+      this.rowsTextStyle = rowsTextStyle;
+    }
+    if (headersTextStyle != null) {
+      this.headersTextStyle = headersTextStyle;
+    }
     // data is optional since you can create the source without initial data
     if (data != null) {
       // update only if data is not null
-      updateData(data: data);
+      updateData(data: _data);
     }
   }
 
   void updateData({required var data}) {
     // get array of keys
-    print(data);
     generateColumns(data["headers"]);
-    dataRows.clear(); // remove the previous data and add the new one
-    print(data);
+    _dataRows.clear(); // remove the previous data and add the new one
     for (int i = 0; i < data["num"]; i++) {
       List<DataGridCell> _cells = [];
       for (int j = 0; j < data["len"]; j++) {
         _cells.add(DataGridCell(
             columnName: data["headers"][j], value: data["data"][i][j]));
       }
-      dataRows.add(DataGridRow(cells: _cells));
+      _dataRows.add(DataGridRow(cells: _cells));
     }
 
     notifyListeners(); // signal an update
@@ -46,9 +52,9 @@ class JSONDataSource extends DataGridSource {
 
   // generate the list of grd columns based on the array of table headers
   void generateColumns(var headers) {
-    gridColumnsList.clear();
+    _gridColumnsList.clear();
     for (var h in headers) {
-      gridColumnsList.add(
+      _gridColumnsList.add(
         GridColumn(
             columnName: h.toString(),
             autoFitPadding: EdgeInsets.all(12.0),
@@ -57,6 +63,7 @@ class JSONDataSource extends DataGridSource {
                 alignment: Alignment.center,
                 child: Text(
                   h.toString(),
+                  style: headersTextStyle,
                 ))),
       );
     }
@@ -172,9 +179,9 @@ class JSONDataSource extends DataGridSource {
       "len": 15,
       "num": 5
     };
-    data = d;
-    updateData(data: data);
-    return data;
+    _data = d;
+    updateData(data: d);
+    return d;
   }
 
 
@@ -184,17 +191,16 @@ class JSONDataSource extends DataGridSource {
 
   // make get request to get json data
   void getData({required String url_, required Map requestJSON}) async {
-    var url = Uri.parse(url_);
-    var body = jsonEncode(requestJSON);
-    post(url, body: jsonEncode(body)).then((Response response) {
-      data = jsonDecode(response.body);
-      updateData(data: data);
+    post(Uri.parse(url_), body: jsonEncode(requestJSON))
+        .then((Response response) {
+      _data = jsonDecode(response.body);
+      updateData(data: _data);
     });
   }
 
 
   @override
-  List<DataGridRow> get rows => dataRows;
+  List<DataGridRow> get rows => _dataRows;
 
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
@@ -205,8 +211,13 @@ class JSONDataSource extends DataGridSource {
             padding: EdgeInsets.all(12.0),
             child: Text(
               e.value.toString(),
-            ),
+          style: rowsTextStyle,
+        ),
           );
         }).toList());
   }
+
+  List<GridColumn> get gridColumnsList => _gridColumnsList;
+
+  get data => _data;
 }

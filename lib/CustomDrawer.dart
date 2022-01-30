@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'UIMain.dart';
 
 class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -38,7 +40,7 @@ class CustomDrawer extends StatelessWidget {
             ),
             title: Text("Gjendja Civile 2008",
                 style:
-                    GoogleFonts.josefinSans(color: Colors.white, fontSize: 15)),
+                GoogleFonts.josefinSans(color: Colors.white, fontSize: 15)),
             onTap: () {
               Navigator.push(
                 context,
@@ -58,12 +60,12 @@ class CustomDrawer extends StatelessWidget {
             ),
             title: Text("Patronazhisti 2021",
                 style:
-                    GoogleFonts.josefinSans(color: Colors.white, fontSize: 15)),
+                GoogleFonts.josefinSans(color: Colors.white, fontSize: 15)),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => UIMain(1),
+                  builder: (context) => const UIMain(1),
                 ),
               );
             },
@@ -78,7 +80,7 @@ class CustomDrawer extends StatelessWidget {
             ),
             title: Text("Targat 2021",
                 style:
-                    GoogleFonts.josefinSans(color: Colors.white, fontSize: 15)),
+                GoogleFonts.josefinSans(color: Colors.white, fontSize: 15)),
             onTap: () {
               Navigator.push(
                 context,
@@ -98,7 +100,7 @@ class CustomDrawer extends StatelessWidget {
             ),
             title: Text("Targat + Patronazhisti",
                 style:
-                    GoogleFonts.josefinSans(color: Colors.white, fontSize: 15)),
+                GoogleFonts.josefinSans(color: Colors.white, fontSize: 15)),
             onTap: () {
               Navigator.push(
                 context,
@@ -118,7 +120,7 @@ class CustomDrawer extends StatelessWidget {
             ),
             title: Text("Rrogat Prill",
                 style:
-                    GoogleFonts.josefinSans(color: Colors.white, fontSize: 15)),
+                GoogleFonts.josefinSans(color: Colors.white, fontSize: 15)),
             onTap: () {
               Navigator.push(
                 context,

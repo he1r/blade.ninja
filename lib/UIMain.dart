@@ -7,19 +7,29 @@ import 'CustomDrawer.dart';
 import 'dataSource.dart';
 import 'main.dart';
 import 'dataSource.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
 
-class UIMain extends StatelessWidget {
+class UIMain extends StatefulWidget {
+  const UIMain(var dbIndex, {Key? key}) : super(key: key);
 
+  @override
+  State<StatefulWidget> createState() {
+    return MainState(0);
+  }
+}
+
+class MainState extends State<UIMain> {
   var fields;
-  var controllers=[];
-  var dbIndex=0;
-  var checkboxVal=0; // temporary
+  var controllers = [];
+  var dbIndex = 0;
+  var checkboxVal = 0; // temporary
   late JSONDataSource dataSource;
 
-  UIMain(this.dbIndex, {Key? key}) : super(key: key) {
 
+  MainState(this.dbIndex) {
     dataSource =
-        JSONDataSource(); // create a grid data source with the data
+        JSONDataSource(const TextStyle(color: Colors.white), const TextStyle(
+            color: Colors.white)); // create a grid data source with the data
     // dataSource.getLocalExample(); // get the local data
     fields = databazat[dbIndex][1];
     for (int i = 0; i < fields.length; i++) {
@@ -27,13 +37,16 @@ class UIMain extends StatelessWidget {
     }
   }
 
+
   Map generateJson() {
     final Map<String, Object> jsonData;
     jsonData = {
-      "db": dbIndex,
+      "db": dbIndex + 1,
+      // convention was set to start from 1 because of the web version
     };
     for (int i = 0; i < fields.length; i++) {
-      jsonData[fields[i][2].toString()]=[fields[i][1]+checkboxVal, controllers[i].text];
+      jsonData[fields[i][2].toString()] =
+      [fields[i][1] + checkboxVal, controllers[i].text];
     }
     print(jsonData);
     return jsonData;
@@ -41,25 +54,25 @@ class UIMain extends StatelessWidget {
 
   //REQUEST DATA FROM SERVER
   void data() {
-    dataSource.getData(url_: 'https://blade.ninja/update', requestJSON:generateJson());
+
   }
 
-  void setDateText(var controller, var date){
-    controller.text=date;
+  void setDateText(var controller, var date) {
+    controller.text = date;
   }
 
   Future<void> _selectDate(BuildContext context, var controller) async {
-    var selectedDate=DateTime.now().toString();
+    var selectedDate = DateTime.now().toString();
     if (controller.text.isNotEmpty) {
       selectedDate = controller.text;
-      print("----->>>>>"+selectedDate);
+      print("----->>>>>" + selectedDate);
     }
     var startDate = DateTime.now();
     try {
       startDate = DateTime.parse(controller.text);
     }
     // ignore: empty_catches
-    on Exception{
+    on Exception {
 
     }
 
@@ -70,18 +83,18 @@ class UIMain extends StatelessWidget {
       lastDate: DateTime.now(),
     );
 
-    if (picked != null){
+    if (picked != null) {
       setDateText(controller, picked.toString().split(" ")[0]);
-      print("---->>"+picked.toString());
+      print("---->>" + picked.toString());
       selectedDate = picked.toString();
     }
   }
 
-  List<Widget> generateInputFields(BuildContext context){
-    List<Widget> data = [];
-    for( int i = 0 ; i < fields.length ; i++) {
+  List<Widget> generateInputFields(BuildContext context) {
+    List<Widget> widgets_list = [];
+    for (int i = 0; i < fields.length; i++) {
       if (fields[i][2] == 'Datelindja') {
-        data.add(
+        widgets_list.add(
           Stack(
             children: [
               Row(
@@ -134,7 +147,7 @@ class UIMain extends StatelessWidget {
         );
       }
       else {
-        data.add(Row(
+        widgets_list.add(Row(
           children: [
             const SizedBox(width: 4, height: 1,),
             // simple space
@@ -154,9 +167,8 @@ class UIMain extends StatelessWidget {
         );
       };
     }
-    return data;
+    return widgets_list;
   }
-//DATABASES LIST
 
   @override
   Widget build(BuildContext context) {
@@ -218,93 +230,99 @@ class UIMain extends StatelessWidget {
           drawer: CustomDrawer(),
           body: Padding(
               padding: const EdgeInsets.all(2),
-              child: Column(
-                children: <Widget>[
-                  ...generateInputFields(context), // INPUT FIELDS
+              child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      ...generateInputFields(context), // INPUT FIELDS
 
-                  const SizedBox(height: 20), // space for buttons
+                      const SizedBox(height: 20), // space for buttons
 
 
-                  Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        height: 40.0,
-                        width: 40.0,
-                        child: ElevatedButton.icon(
-                          icon: const Icon(
-                            Icons.clear,
-                            color: Colors.white,
-                            size: 25.0,
+                      Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            height: 40.0,
+                            width: 40.0,
+                            child: ElevatedButton.icon(
+                              icon: const Icon(
+                                Icons.clear,
+                                color: Colors.white,
+                                size: 25.0,
+                              ),
+                              label: Text(''),
+                              style: ElevatedButton.styleFrom(
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.only(left: 6),
+                                primary: const Color(0xff0b51d09),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    side: const BorderSide(
+                                        color: Color(0xff0b51d09))),
+                              ),
+                              onPressed: () {
+                                for (int i = 0; i < fields.length; i++) {
+                                  controllers[i].text = "";
+                                }
+                              },
+                            ),
                           ),
-                          label: Text(''),
-                          style: ElevatedButton.styleFrom(
-                            alignment: Alignment.center,
-                            padding:  EdgeInsets.only(left: 6),
-                            primary:  const Color(0xff0b51d09),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                                side: const BorderSide(color: Color(0xff0b51d09))),
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            height: 40.0,
+                            width: 40.0,
+                            child: ElevatedButton.icon(
+                              icon: const Icon(
+                                Icons.search,
+                                color: Colors.white,
+                                size: 25.0,
+                              ),
+                              label: Text(''),
+                              style: ElevatedButton.styleFrom(
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.only(left: 6),
+                                primary: const Color(0xff2769c4),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    side: const BorderSide(
+                                        color: Color(0xff2769c4))),
+                              ),
+                              onPressed: () =>
+                                  dataSource.getData(
+                                      url_: 'https://blade.ninja/update',
+                                      requestJSON: generateJson()),
+                            ),
                           ),
-                          onPressed: (){for(int i=0; i<fields.length; i++){controllers[i].text="";}},
-                        ),
+                        ],
                       ),
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        height: 40.0,
-                        width: 40.0,
-                        child: ElevatedButton.icon(
-                          icon: const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                            size: 25.0,
-                          ),
-                          label: Text(''),
-                          style: ElevatedButton.styleFrom(
-                            alignment: Alignment.center,
-                            padding:  EdgeInsets.only(left: 6),
-                            primary:  const Color(0xff2769c4),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                                side: const BorderSide(color: Color(0xff2769c4))),
-                          ),
-                          onPressed: data,
+                      SfDataGridTheme(
+                        data: SfDataGridThemeData(
+                            gridLineColor: const Color(0xff009889),
+                            headerColor: const Color(0xff009889)
+                        ),
+                        child: SfDataGrid(
+                          // set the data source
+                          source: dataSource,
+                          // set the column width by calculating the max size among the header cell and among the cells in column.
+                          columnWidthMode: ColumnWidthMode.auto,
+                          // make sure the property above (columnWidthMode.auto) is applied in all rows
+                          columnWidthCalculationRange: ColumnWidthCalculationRange
+                              .allRows,
+                          // add the columns array to the grid
+                          columns: dataSource.gridColumnsList,
+                          // *note that whatever changes you do to the data do not change
+                          // the array/list or assign another list to columns property
+                          // because it will change the address and the changes will
+                          // not be reflected, this reference should never change, modify
+                          // the list directly*
                         ),
                       ),
                     ],
-                  ),
-                  SfDataGrid(
-                    // set the data source
-                    source: dataSource,
-                    // set the column width by calculating the max size among the header cell and among the cells in column.
-                    columnWidthMode: ColumnWidthMode.auto,
-                    // make sure the property above (columnWidthMode.auto) is applied in all rows
-                    columnWidthCalculationRange: ColumnWidthCalculationRange.allRows,
-                    // add the columns array to the grid
-                    columns: dataSource.gridColumnsList,
-                    // *note that whatever changes you do to the data do not change
-                    // the array/list or assign another list to columns property
-                    // because it will change the address and the changes will
-                    // not be reflected, this reference should never change, modify
-                    // the list directly*
-                  ),
-                ],
-              ))),
+                  ))
+          )
+      ),
+
 
     );
   }
 }
-
-//                          enabledBorder: OutlineInputBorder( //UnderlineInputBorder
-//                            borderSide: BorderSide(color: Colors.white, width: 1.0, ),
-//                          ),
-//                          border: OutlineInputBorder(
-//                              borderSide: BorderSide(color: Colors.teal)
-//                          ),
-//                          border: InputBorder.none,
-//                          focusedBorder: InputBorder.none,
-//                          enabledBorder: InputBorder.none,
-//                          errorBorder: InputBorder.none,
-//                          disabledBorder: InputBorder.none,
-
-//border: InputBorder.none
