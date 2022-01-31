@@ -164,7 +164,7 @@ class HomeScreen extends StatelessWidget {
           Container(
             width: 120,
             height: 40,
-            margin: const EdgeInsets.only(top: 10, left: 10),
+            margin: const EdgeInsets.only(top: 10),
             child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
