@@ -170,10 +170,12 @@ class MainState extends State<UIMain> {
                 controller: controllers[i],
               ),
             ),
-            const SizedBox(
-              width: 60,
-              height: 2,
-            ),
+            const Expanded(
+              child: Checkbox(
+                value: false,
+                onChanged: null,
+              ),
+            )
             // space where the button is meant to go
           ],
         ));
@@ -194,7 +196,7 @@ class MainState extends State<UIMain> {
         inputDecorationTheme: const InputDecorationTheme(
           contentPadding: EdgeInsets.all(10),
           border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.blueGrey, width: 20)),
+              borderSide: BorderSide(color: Colors.blueGrey)),
           disabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.blueGrey)),
           enabledBorder: UnderlineInputBorder(
