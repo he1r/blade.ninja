@@ -1,12 +1,13 @@
 // ignore_for_file: avoid_print
+import 'package:databaza/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'VerificationPage.dart';
 
 // ignore: must_be_immutable
-class SignUp extends StatelessWidget {
+class VerificationPage extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
   @override
   Widget build(BuildContext context) {
@@ -66,58 +67,21 @@ class SignUp extends StatelessWidget {
                 child: Column(children: [
           Container(
             width: 300,
-            child: const TextField(
-              style: TextStyle(
+            child: TextField(
+              style: const TextStyle(
                   fontSize: 18.0,
                   height: 1.1,
                   color: Colors.white,
                   fontFamily: 'Akrobat-Bold'),
-              decoration: InputDecoration(
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: const InputDecoration(
                   filled: true,
                   fillColor: Colors.black54,
                   hintStyle: TextStyle(
                       color: Colors.white, fontFamily: 'Akrobat-Bold'),
                   border: InputBorder.none,
-                  hintText: 'Username'),
-            ),
-          ),
-          Container(
-            width: 300,
-            padding: const EdgeInsets.only(top: 10),
-            child: const TextField(
-              style: TextStyle(
-                  fontSize: 18.0,
-                  height: 1.1,
-                  color: Colors.white,
-                  fontFamily: 'Akrobat-Bold'),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.black54,
-                hintStyle:
-                    TextStyle(color: Colors.white, fontFamily: 'Akrobat-Bold'),
-                border: InputBorder.none,
-                hintText: "Email",
-              ),
-            ),
-          ),
-          Container(
-            width: 300,
-            padding: const EdgeInsets.only(top: 10),
-            child: const TextField(
-              obscureText: true,
-              style: TextStyle(
-                  fontSize: 18.0,
-                  height: 1.1,
-                  color: Colors.white,
-                  fontFamily: 'Akrobat-Bold'),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.black54,
-                hintStyle:
-                    TextStyle(color: Colors.white, fontFamily: 'Akrobat-Bold'),
-                border: InputBorder.none,
-                hintText: "Password",
-              ),
+                  hintText: 'Enter Code'),
             ),
           ),
           Container(
@@ -128,7 +92,7 @@ class SignUp extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => VerificationPage(),
+                    builder: (context) => HomeScreen(),
                   ),
                 );
               },
@@ -136,7 +100,7 @@ class SignUp extends StatelessWidget {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.lightBlue)),
               child: const Text(
-                "Sign Up",
+                "Confirm",
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
