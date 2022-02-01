@@ -216,12 +216,10 @@ class JSONDataSource extends DataGridSource {
         _data = jsonDecode(response.body);
         updateData(data: _data);
       });
-    }
-    else {
+    } else {
       //TODO: show message please fill at least 1 field
     }
   }
-
 
   bool checkJSON() {
     //TODO: implement validation
@@ -249,20 +247,18 @@ class JSONDataSource extends DataGridSource {
           alignment: Alignment.center,
           child: TextButton(
             onPressed: () {
-              getFamily(row
-                  .getCells()
-                  .last
-                  .value);
+              getFamily(row.getCells().last.value);
             },
-            style: TextButton.styleFrom(
-              primary: Colors.pink,
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0))),
+              backgroundColor: MaterialStateProperty.all(Colors.green),
             ),
             child: Text(
               'Familja',
               style: rowsTextStyle,
             ),
-          )
-      );
+          ));
     }
     return DataGridRowAdapter(cells: row_);
   }
