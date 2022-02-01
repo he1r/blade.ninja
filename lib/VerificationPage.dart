@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'SignUp.dart';
 
 // ignore: must_be_immutable
 class VerificationPage extends StatelessWidget {
@@ -52,6 +53,21 @@ class VerificationPage extends StatelessWidget {
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
+          leading: Navigator.canPop(context)
+              ? IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignUp(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ))
+              : null,
           toolbarHeight: 50,
           centerTitle: true,
           backgroundColor: Colors.black,
