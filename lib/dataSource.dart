@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:databaza/databazat.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -16,11 +17,13 @@ class JSONDataSource extends DataGridSource {
   // not be reflected, this reference should never change, modify
   // the list directly*
 
+  int _dbIndex = 0;
   var _data; // variable to hold json data
   TextStyle rowsTextStyle = const TextStyle(color: Colors.white);
   TextStyle headersTextStyle = const TextStyle(color: Colors.white);
 
-  JSONDataSource([var rowsTextStyle, var headersTextStyle, var data]) {
+  JSONDataSource(this._dbIndex,
+      [var rowsTextStyle, var headersTextStyle, var data]) {
     if (rowsTextStyle != null) {
       this.rowsTextStyle = rowsTextStyle;
     }
@@ -35,15 +38,19 @@ class JSONDataSource extends DataGridSource {
   }
 
   void updateData({required var data}) {
-    if (data['len'] > 0) {
-      // get array of keys
+    if (data['num'] > 0) {
+      if (_dbIndex == 0) {
+        data['headers'][0] = '';
+      }
       generateColumns(data["headers"]);
       _dataRows.clear(); // remove the previous data and add the new one
       for (int i = 0; i < data["num"]; i++) {
         List<DataGridCell> _cells = [];
         for (int j = 0; j < data["len"]; j++) {
-          _cells.add(DataGridCell(
-              columnName: data["headers"][j], value: data["data"][i][j]));
+          _cells.add(
+            DataGridCell(
+                columnName: data["headers"][j], value: data["data"][i][j]),
+          );
         }
         _dataRows.add(DataGridRow(cells: _cells));
       }
@@ -189,8 +196,8 @@ class JSONDataSource extends DataGridSource {
   }
 
   void getExampleDataFromAPI() async {
-    getData(url_: 'https://blade.ninja/update', requestJSON: {
-      "db": 1,
+    getData(url_: Databazat.defaultUrl, requestJSON: {
+      "db": 0,
       "Emri": [1, "a"]
     });
   }
@@ -219,8 +226,7 @@ class JSONDataSource extends DataGridSource {
 
   @override
   DataGridRowAdapter buildRow(DataGridRow row) {
-    return DataGridRowAdapter(
-        cells: row.getCells().map<Widget>((e) {
+    List<Widget> row_ = row.getCells().map<Widget>((e) {
       return Container(
         alignment: Alignment.center,
         padding: const EdgeInsets.all(12.0),
@@ -229,7 +235,35 @@ class JSONDataSource extends DataGridSource {
           style: rowsTextStyle,
         ),
       );
-    }).toList());
+    }).toList();
+    // add "Familja" button for
+    if (_dbIndex == 0) {
+      row_[0] = Container(
+          alignment: Alignment.center,
+          child: TextButton(
+            onPressed: () {
+              getFamily(row
+                  .getCells()
+                  .last
+                  .value);
+            },
+            style: TextButton.styleFrom(
+              primary: Colors.pink,
+            ),
+            child: Text(
+              'Familja',
+              style: rowsTextStyle,
+            ),
+          )
+      );
+    }
+    return DataGridRowAdapter(cells: row_);
+  }
+
+  void getFamily(var id) {
+    var json = Databazat.familyJSON;
+    json["Id_Kryefamiliari"] = [0, id];
+    getData(url_: Databazat.defaultUrl, requestJSON: json);
   }
 
   List<GridColumn> get gridColumnsList => _gridColumnsList;

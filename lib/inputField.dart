@@ -44,19 +44,24 @@ class MainState extends State<CustomInputField> {
   MainState({Key? key, required field, required defaultCheckbox}) {
     _field = field;
     _defaultCheckbox = defaultCheckbox;
-    print(field);
-    print(defaultCheckbox);
     _isDate = _field == 'Datelindja';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (_isDate) {
+      _datePicker = SliderDatePicker(date: "Datelindja");
+    } else {
+      _controller = TextEditingController(text: "");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     Container _checkbox;
     if (_isDate) {
-      _datePicker = SliderDatePicker(date: "Datelindja");
       return _datePicker;
-    } else {
-      _controller = TextEditingController(text: "");
     }
     if (_defaultCheckbox == 1) {
       _checkbox = Container(
@@ -101,15 +106,14 @@ class MainState extends State<CustomInputField> {
           ),
         ),
         _checkbox,
-        // space where the button is meant to go
       ],
     );
   }
 
   void checkboxClicked() {
-//    setState(() {
-//      _checkBoxVal=!_checkBoxVal;
-//    });
+    setState(() {
+      _checkBoxVal = !_checkBoxVal;
+    });
   }
 
   void resetValue() {
@@ -118,6 +122,9 @@ class MainState extends State<CustomInputField> {
     } else {
       _controller.text = "";
     }
+    setState(() {
+      _checkBoxVal = false;
+    });
   }
 
   String getValue() {
@@ -130,7 +137,7 @@ class MainState extends State<CustomInputField> {
 
   int getCheckBox() {
     if (_defaultCheckbox == 0) {
-      return (_checkBoxVal) as int;
+      return _checkBoxVal == true ? 1 : 0;
     }
     return 1;
   }

@@ -65,7 +65,13 @@ class MainState extends State<SliderDatePicker> {
                 onPressed: () {
                   DatePicker.showDatePicker(context,
                       theme: const DatePickerTheme(
+                        backgroundColor: Colors.black,
                         containerHeight: 210.0,
+                        itemStyle: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                        doneStyle: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                       showTitleActions: true,
                       minTime: DateTime(1900, 1, 1),

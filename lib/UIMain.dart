@@ -1,10 +1,9 @@
+import 'package:databaza/databazat.dart';
 import 'package:databaza/inputField.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'CustomDrawer.dart';
 import 'dataSource.dart';
-import 'main.dart';
-import 'datePicker.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
 class UIMain extends StatefulWidget {
@@ -14,56 +13,26 @@ class UIMain extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
+    // ignore: no_logic_in_create_state
     return MainState(dbIndex);
   }
 }
 
 class MainState extends State<UIMain> {
   List<CustomInputField> _widgets_list = [];
-  var fields;
-  var dbIndex = 0;
-  var checkboxVal = 0; // temporary
-  late JSONDataSource dataSource;
+  var _fields;
+  var _dbIndex = 0;
+  late JSONDataSource _dataSource;
 
-  void refresh() {
-    setState(() {
-      checkboxVal = 1;
-    });
-  }
-
-  MainState(this.dbIndex) {
-    dataSource = JSONDataSource(
+  MainState(dbIndex) {
+    _dbIndex = dbIndex;
+    _dataSource = JSONDataSource(
+        _dbIndex,
         const TextStyle(color: Colors.white),
         const TextStyle(
-            color: Colors.white)); // create a grid data source with the data
-    // dataSource.getLocalExample(); // get the local data
-    fields = databazat[dbIndex][1];
-  }
-
-  Map generateJson() {
-    final Map<String, Object> jsonData;
-    jsonData = {
-      "db": dbIndex + 1,
-      // convention was set to start from 1 because of the web version
-    };
-    for (int i = 0; i < fields.length; i++) {
-      jsonData[fields[i][2].toString()] = [
-        _widgets_list[i].getCheckBox(),
-        _widgets_list[i].getValue()
-      ];
-    }
-    print(jsonData);
-    return jsonData;
-  }
-
-  List<CustomInputField> generateInputFields(BuildContext context) {
-    if (_widgets_list.isEmpty) {
-      for (int i = 0; i < fields.length; i++) {
-        _widgets_list.add(CustomInputField(
-            field: fields[i][2], defaultCheckbox: fields[i][1]));
-      }
-    }
-    return _widgets_list;
+            color: Colors
+                .white)); // create a grid data source, set the text style for header and rows of the table
+    _fields = Databazat.databazat[_dbIndex][1];
   }
 
   @override
@@ -77,9 +46,9 @@ class MainState extends State<UIMain> {
     return MaterialApp(
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xff1f252e),
+          backgroundColor: Colors.black,
         ),
-        scaffoldBackgroundColor: const Color(0xff1f2836),
+        scaffoldBackgroundColor: Colors.black,
         inputDecorationTheme: const InputDecorationTheme(
           contentPadding: EdgeInsets.all(10),
           border: UnderlineInputBorder(
@@ -124,7 +93,7 @@ class MainState extends State<UIMain> {
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             centerTitle: true,
-            title: Text(databazat[dbIndex][0].toString()),
+            title: Text(Databazat.databazat[_dbIndex][0].toString()),
           ),
           drawer: const CustomDrawer(),
           body: Padding(
@@ -159,9 +128,7 @@ class MainState extends State<UIMain> {
                                         color: Color(0xff0b51d09))),
                               ),
                               onPressed: () {
-                                for (int i = 0; i < fields.length; i++) {
-                                  _widgets_list[i].resetValue();
-                                }
+                                clearInput();
                               },
                             ),
                           ),
@@ -185,9 +152,10 @@ class MainState extends State<UIMain> {
                                     side:
                                     const BorderSide(color: Color(0xff2769c4))),
                               ),
-                              onPressed: () => dataSource.getData(
-                                  url_: 'https://blade.ninja/update',
-                                  requestJSON: generateJson()),
+                              onPressed: () =>
+                                  _dataSource.getData(
+                                      url_: 'https://blade.ninja/update',
+                                      requestJSON: generateJson()),
                             ),
                           ),
                         ],
@@ -198,14 +166,14 @@ class MainState extends State<UIMain> {
                             headerColor: const Color(0xff009889)),
                         child: SfDataGrid(
                           // set the data source
-                          source: dataSource,
+                          source: _dataSource,
                           // set the column width by calculating the max size among the header cell and among the cells in column.
                           columnWidthMode: ColumnWidthMode.auto,
                           // make sure the property above (columnWidthMode.auto) is applied in all rows
                           columnWidthCalculationRange:
                           ColumnWidthCalculationRange.allRows,
                           // add the columns array to the grid
-                          columns: dataSource.gridColumnsList,
+                          columns: _dataSource.gridColumnsList,
                           // *note that whatever changes you do to the data do not change
                           // the array/list or assign another list to columns property
                           // because it will change the address and the changes will
@@ -216,5 +184,36 @@ class MainState extends State<UIMain> {
                     ],
                   )))),
     );
+  }
+
+  List<CustomInputField> generateInputFields(BuildContext context) {
+    if (_widgets_list.isEmpty) {
+      for (int i = 0; i < _fields.length; i++) {
+        _widgets_list.add(CustomInputField(
+            field: _fields[i][2], defaultCheckbox: _fields[i][1]));
+      }
+    }
+    return _widgets_list;
+  }
+
+  Map generateJson() {
+    final Map<String, Object> jsonData;
+    jsonData = {
+      "db": _dbIndex,
+    };
+    for (int i = 0; i < _fields.length; i++) {
+      jsonData[_fields[i][2].toString()] = [
+        _widgets_list[i].getCheckBox(),
+        _widgets_list[i].getValue()
+      ];
+    }
+    print(jsonData);
+    return jsonData;
+  }
+
+  void clearInput() {
+    for (int i = 0; i < _fields.length; i++) {
+      _widgets_list[i].resetValue();
+    }
   }
 }
