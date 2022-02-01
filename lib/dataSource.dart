@@ -35,19 +35,23 @@ class JSONDataSource extends DataGridSource {
   }
 
   void updateData({required var data}) {
-    // get array of keys
-    generateColumns(data["headers"]);
-    _dataRows.clear(); // remove the previous data and add the new one
-    for (int i = 0; i < data["num"]; i++) {
-      List<DataGridCell> _cells = [];
-      for (int j = 0; j < data["len"]; j++) {
-        _cells.add(DataGridCell(
-            columnName: data["headers"][j], value: data["data"][i][j]));
+    if (data['len'] > 0) {
+      // get array of keys
+      generateColumns(data["headers"]);
+      _dataRows.clear(); // remove the previous data and add the new one
+      for (int i = 0; i < data["num"]; i++) {
+        List<DataGridCell> _cells = [];
+        for (int j = 0; j < data["len"]; j++) {
+          _cells.add(DataGridCell(
+              columnName: data["headers"][j], value: data["data"][i][j]));
+        }
+        _dataRows.add(DataGridRow(cells: _cells));
       }
-      _dataRows.add(DataGridRow(cells: _cells));
-    }
 
-    notifyListeners(); // signal an update
+      notifyListeners(); // signal an update
+    } else {
+      // TODO: show message no results found
+    }
   }
 
   // generate the list of grd columns based on the array of table headers
@@ -193,11 +197,21 @@ class JSONDataSource extends DataGridSource {
 
   // make get request to get json data
   void getData({required String url_, required Map requestJSON}) async {
-    post(Uri.parse(url_), body: jsonEncode(requestJSON))
-        .then((Response response) {
-      _data = jsonDecode(response.body);
-      updateData(data: _data);
-    });
+    if (checkJSON()) {
+      post(Uri.parse(url_), body: jsonEncode(requestJSON))
+          .then((Response response) {
+        _data = jsonDecode(response.body);
+        updateData(data: _data);
+      });
+    }
+    else {
+      //TODO: show message please fill at least 1 field
+    }
+  }
+
+  bool checkJSON() {
+    //TODO: implement validation
+    return true;
   }
 
   @override
