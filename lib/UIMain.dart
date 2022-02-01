@@ -128,7 +128,8 @@ class MainState extends State<UIMain> {
                                         color: Color(0xff0b51d09))),
                               ),
                               onPressed: () {
-                                clearInput();
+                            _dataSource.clear();
+                            clearInput();
                               },
                             ),
                           ),
@@ -152,10 +153,12 @@ class MainState extends State<UIMain> {
                                     side:
                                     const BorderSide(color: Color(0xff2769c4))),
                               ),
-                              onPressed: () =>
+                              onPressed: () {
+                                _dataSource.clear();
                                   _dataSource.getData(
                                       url_: 'https://blade.ninja/update',
-                                      requestJSON: generateJson()),
+                                      requestJSON: generateJson());
+                              },
                             ),
                           ),
                         ],

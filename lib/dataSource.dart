@@ -37,6 +37,12 @@ class JSONDataSource extends DataGridSource {
     }
   }
 
+  void clear() {
+    generateColumns([]);
+    _dataRows.clear(); // remove the previous data and add the new one
+    notifyListeners(); // signal an update
+  }
+
   void updateData({required var data}) {
     if (data['num'] > 0) {
       if (_dbIndex == 0) {
@@ -215,6 +221,7 @@ class JSONDataSource extends DataGridSource {
       //TODO: show message please fill at least 1 field
     }
   }
+
 
   bool checkJSON() {
     //TODO: implement validation
