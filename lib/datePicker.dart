@@ -42,20 +42,18 @@ class MainState extends State<SliderDatePicker> {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+      Container(
+        padding: const EdgeInsets.only(left: 5, top: 10),
         child: Column(
           children: <Widget>[
             SizedBox(
-              height: 60.0,
+              height: 40.0,
               child: TextButton(
                 style: TextButton.styleFrom(
-                  backgroundColor: Colors.transparent,
-                  primary: Colors.red,
+                  backgroundColor: Colors.black,
+                  primary: Colors.black,
+
                   padding: EdgeInsets.only(left: -10),
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.red),
-                      borderRadius: BorderRadius.circular(16)),
 //                          RoundedRectangleBorder(
 //                            side: const BorderSide(
 //                                color: Colors.orangeAccent
@@ -85,7 +83,7 @@ class MainState extends State<SliderDatePicker> {
                 },
                 child: Container(
                   alignment: Alignment.center,
-                  height: 50.0,
+                  height: 20.0,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -108,6 +106,14 @@ class MainState extends State<SliderDatePicker> {
                     ],
                   ),
                 ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(right: 50),
+              height: 2,
+              child: const Divider(
+                color: Colors.blueGrey,
+                thickness: 1,
               ),
             ),
           ],
